@@ -1,11 +1,12 @@
 import { HomeContextProvider } from "../../context/HomeContext";
 import AnimatedTransition from "../AnimatedTransition";
+import Home from '../../components/Home/Home'
 
 function HomeView() {
   return (
     <AnimatedTransition>
       <HomeContextProvider>
-        <h1>Pantalla 1</h1>
+        <Home/>
       </HomeContextProvider>
     </AnimatedTransition>
   );

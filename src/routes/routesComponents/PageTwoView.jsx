@@ -5,7 +5,7 @@ function PageTwoView() {
   return (
     <AnimatedTransition>
       <PageTwoContextProvider>
-        <h1>Pantalla 2</h1>
+        <h1 className="dark:text-white">Pantalla 2</h1>
       </PageTwoContextProvider>
     </AnimatedTransition>
   );
