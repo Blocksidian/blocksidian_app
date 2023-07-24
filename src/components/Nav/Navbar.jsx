@@ -29,26 +29,47 @@ function Navbar() {
   };
 
   const navigation = [
-    { name: "Dashboard", href: "/" },
-    { name: "Events", href: "/events" },
-    { name: "Exchange ticket", href: "/exchange_ticket" },
-    { name: "Create Event", href: "/create_event" },
+    { name: "Dashboard", href: "/", title: "Dashboard page" },
+    { name: "Events", href: "/events", title: "Events page" },
     {
-      name: "Shopping Cart",
+      name: "Exchange ticket",
+      href: "/exchange_ticket",
+      title: "Exchange ticket page",
+    },
+    { name: "Create Event", href: "/create_event", title: "Create Event page" },
+    {
+      name: "Shopping cart",
       href: "/shopping_cart",
+      title: "Shopping cart page",
       icon: <FaCartShopping />,
     },
-    { name: "Profile", href: "/profile", icon: <FaUser /> },
+    {
+      name: "Profile",
+      href: "/profile",
+      title: "Profile page",
+      icon: <FaUser />,
+    },
   ];
 
   return (
     <>
       <nav className="sticky top-0 z-50 px-3 py-2 flex gap-3 place-items-center bg-SoftWhite dark:bg-DarkBlue md:py-3 transition">
-        <NavLink to="" className="flex-initial" onClick={handleMobileMenuLogo}>
-          <img src={imageMobile} alt="Mobile Logo" className="md:hidden h-16 hover:drop-shadow" />
+        <NavLink
+          to=""
+          title="Bloksidian page"
+          className="flex-initial"
+          onClick={handleMobileMenuLogo}
+        >
+          <img
+            src={imageMobile}
+            alt="Mobile Logo"
+            title="Navbar Mobile Logo of Blocsidian"
+            className="md:hidden h-16 hover:drop-shadow"
+          />
           <img
             src={imageDesktop}
             alt="Desktop Logo"
+            title="Navbar Desktop Logo of Blocsidian"
             className="hidden md:inline-block h-14 hover:drop-shadow"
           />
         </NavLink>
@@ -60,6 +81,7 @@ function Navbar() {
               key={index}
               href={item.href}
               name={item.name}
+              title={item.title}
               icon={item.icon}
             />
           ))}
@@ -79,6 +101,7 @@ function Navbar() {
               key={index}
               href={item.href}
               name={item.name}
+              title={item.title}
               click={handleMobileMenu}
             />
           ))}
@@ -136,10 +159,11 @@ const BurguerMenu = ({ click, state }) => {
 
 // Componente para reutilizar codigo
 
-const NavItemMobile = ({ href = "", name = "Link", click }) => {
+const NavItemMobile = ({ href = "", name = "Link", title = "", click }) => {
   return (
     <li className="text-center">
       <NavLink
+        title={title}
         to={`${href}`}
         className="py-1 px-5 hover:font-medium hover:text-DarkViolet dark:hover:text-SoftViolet"
         onClick={() => {
@@ -152,10 +176,11 @@ const NavItemMobile = ({ href = "", name = "Link", click }) => {
   );
 };
 
-const NavItemDesktop = ({ href = "", name = "Link", icon }) => {
+const NavItemDesktop = ({ href = "", name = "Link", title = "", icon }) => {
   return (
     <li className={`${icon ? "px-1" : " flex-initial"}`}>
       <NavLink
+        title={title}
         to={`${href}`}
         className={`${
           icon

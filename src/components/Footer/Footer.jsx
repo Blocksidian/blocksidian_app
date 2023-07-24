@@ -11,29 +11,27 @@ function footer() {
 
   const navigation = {
     solutions: [
-      { name: "Main Page", href: "/" },
-      { name: "Other", href: "/other" },
+      { name: "Main Page", href: "/", title: "Main Page" },
+      { name: "Other", href: "/other", title: "Others Page" },
     ],
-    support: [{ name: "Contact", href: "/contact" }],
-    company: [{ name: "About", href: "/about" }],
+    support: [{ name: "Contact", href: "/contact", title: "Contact Page" }],
+    company: [{ name: "About", href: "/about", title: "About Page" }],
     services: [
-      { name: "Privacy", href: "/privacy" },
-      { name: "Terms", href: "/terms" },
+      { name: "Privacy", href: "/privacy", title: "Privacy Page" },
+      { name: "Terms", href: "/terms", title: "Terms Page" },
     ],
     social: [
       {
         name: "Youtube",
         href: "https://www.youtube.com/@BlocksidianInc",
+        title: "Youtube Page",
         icon: <FaYoutube />,
-        colorW: "slate-300",
-        colorD: "slate-300",
       },
       {
         name: "GitHub",
         href: "https://github.com/MierderTheKat/BlocksidianFrontend",
+        title: "Github Page",
         icon: <FaGithub />,
-        colorW: "black",
-        colorD: "white",
       },
     ],
   };
@@ -42,8 +40,17 @@ function footer() {
     <footer className="sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
       <article className="md:flex md:justify-evenly">
         <section className="flex justify-center gap-8 items-center sm:inline">
-          <NavLink to="" className="flex justify-center">
-            <img src={imageDesktop} alt="Desktop Logo" className="h-10 hover:drop-shadow" />
+          <NavLink
+            to=""
+            title="Bloksidian page"
+            className="flex justify-center"
+          >
+            <img
+              src={imageDesktop}
+              alt="Desktop Logo"
+              title="Footer Logo of Blocsidian"
+              className="h-10 hover:drop-shadow"
+            />
           </NavLink>
           <ul className="flex flex-wrap justify-center gap-3 my-5">
             <FooterItemsSocialNav items={navigation.social} />
@@ -53,13 +60,13 @@ function footer() {
           <ul className="flex flex-wrap justify-evenly sm:justify-center text-center">
             <li className="dark:text-SoftWhite sm:flex">
               <div>
-                <h3 className="hover:font-medium cursor-default">Visit Us</h3>
+                <p className="hover:font-medium cursor-default">Visit Us</p>
                 <ul>
                   <FooterItemsNav items={navigation.solutions} />
                 </ul>
               </div>
               <div>
-                <h3 className="hover:font-medium cursor-default">Call Us</h3>
+                <p className="hover:font-medium cursor-default">Call Us</p>
                 <ul>
                   <FooterItemsNav items={navigation.support} />
                 </ul>
@@ -67,13 +74,13 @@ function footer() {
             </li>
             <li className="dark:text-SoftWhite sm:flex">
               <div>
-                <h3 className="hover:font-medium cursor-default">Company</h3>
+                <p className="hover:font-medium cursor-default">Company</p>
                 <ul>
                   <FooterItemsNav items={navigation.company} />
                 </ul>
               </div>
               <div>
-                <h3 className="hover:font-medium cursor-default">Services</h3>
+                <p className="hover:font-medium cursor-default">Services</p>
                 <ul>
                   <FooterItemsNav items={navigation.services} />
                 </ul>
@@ -96,6 +103,7 @@ const FooterItemsNav = ({ items }) => {
       {items.map((item, index) => (
         <li key={index} className="w-32 mt-2 last:mb-4 text-SoftGray">
           <NavLink
+            title={item.title}
             to={`${item.href}`}
             className="py-1 mx-2 hover:text-black dark:hover:text-SoftWhite"
           >
@@ -113,6 +121,7 @@ const FooterItemsSocialNav = ({ items }) => {
       {items.map((item, index) => (
         <li key={index} className="text-3xl	h-8 w-8 text-SoftGray">
           <a
+            title={item.title}
             href={`${item.href}`}
             target="blank"
             className="hover:text-black dark:hover:text-white"

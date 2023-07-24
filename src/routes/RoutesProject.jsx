@@ -22,7 +22,7 @@ function RoutesProject() {
         <Route path="*" element={<ErrorView />} />
         {/* Todas las Vistas */}
         <Route path="/" element={<HomeView />} />
-        <Route path="/page2" element={<PageTwoView />} />
+        <Route path="/events" element={<PageTwoView />} />
       </Routes>
     </AnimatePresence>
   );
