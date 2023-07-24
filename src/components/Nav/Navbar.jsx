@@ -49,7 +49,7 @@ function Navbar() {
           <NavItemDesktop refa="create_event" name="Create an Event" />
         </ul>
         <DarkModeSwitch />
-        <HamburguerMenu click={handleMobileMenu} state={burgerState} />
+        <BurguerMenu click={handleMobileMenu} state={burgerState} />
         {/* Mobile Menu Toggle */}
         <ul
           className={`${
@@ -94,7 +94,7 @@ function Navbar() {
   );
 }
 
-const HamburguerMenu = ({ click, state }) => {
+const BurguerMenu = ({ click, state }) => {
   const [isOpen, setIsOpen] = useState(state);
 
   useEffect(() => {
@@ -114,17 +114,17 @@ const HamburguerMenu = ({ click, state }) => {
       }}
     >
       <div
-        className={`absolute w-full h-1 bg-DarkViolet dark:bg-SoftViolet left-0 rounded ${
+        className={`absolute w-full h-1 bg-DarkViolet left-0 rounded ${
           isOpen ? "rotate-45 top-2.5" : "top-0"
         } transition`}
       ></div>
       <div
-        className={`absolute h-1 bg-DarkViolet dark:bg-SoftViolet top-2.5 left-0 rounded ${
+        className={`absolute h-1 bg-DarkViolet top-2.5 left-0 rounded ${
           isOpen ? "w-1 left-3.5" : "w-full"
         } transition-all`}
       ></div>
       <div
-        className={`absolute w-full h-1 bg-DarkViolet dark:bg-SoftViolet left-0 rounded ${
+        className={`absolute w-full h-1 bg-DarkViolet left-0 rounded ${
           isOpen ? "-rotate-45 top-2.5" : "top-5"
         } transition`}
       ></div>
