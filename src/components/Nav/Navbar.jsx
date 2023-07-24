@@ -5,6 +5,7 @@ import DarkModeSwitch from "../DarkMode/DarkMode";
 import imageMobile from "../../assets/LogoHexagon.svg";
 import imageDesktopW from "../../assets/WhiteLogoXL.svg";
 import imageDesktopB from "../../assets/BlackLogoXL.svg";
+import { FaCartShopping, FaUser } from "react-icons/fa6";
 
 function Navbar() {
   const { darkMode } = useContext(GlobalContext);
@@ -27,26 +28,41 @@ function Navbar() {
     }
   };
 
+  const navigation = [
+    { name: "Dashboard", href: "/" },
+    { name: "Events", href: "/events" },
+    { name: "Exchange ticket", href: "/exchange_ticket" },
+    { name: "Create Event", href: "/create_event" },
+    {
+      name: "Shopping Cart",
+      href: "/shopping_cart",
+      icon: <FaCartShopping />,
+    },
+    { name: "Profile", href: "/profile", icon: <FaUser /> },
+  ];
+
   return (
     <>
-      <nav className="sticky top-0 z-50 flex place-items-center px-3 py-2 lg:py-3 bg-SoftWhite dark:bg-DarkBlue transition">
+      <nav className="sticky top-0 z-50 px-3 py-2 flex gap-3 place-items-center bg-SoftWhite dark:bg-DarkBlue md:py-3 transition">
         <NavLink to="" className="flex-initial" onClick={handleMobileMenuLogo}>
-          <img src={imageMobile} alt="Mobile Logo" className="lg:hidden h-16" />
+          <img src={imageMobile} alt="Mobile Logo" className="md:hidden h-16 hover:drop-shadow" />
           <img
             src={imageDesktop}
             alt="Desktop Logo"
-            className="hidden lg:inline-block h-14"
+            className="hidden md:inline-block h-14 hover:drop-shadow"
           />
         </NavLink>
         <div className="flex-auto"></div>
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex flex-none place-items-center dark:text-white">
-          <NavItemDesktop refa="" name="Dashboard" />
-          <NavItemDesktop refa="profile" name="User profile" />
-          <NavItemDesktop refa="events" name="Events" />
-          <NavItemDesktop refa="shopping_cart" name="Shopping Cart" />
-          <NavItemDesktop refa="exchange_ticket" name="Exchange ticket" />
-          <NavItemDesktop refa="create_event" name="Create an Event" />
+        <ul className="hidden text-DarkBlue gap-3 flex-none place-items-center dark:text-SoftWhite sm:flex">
+          {navigation.map((item, index) => (
+            <NavItemDesktop
+              key={index}
+              href={item.href}
+              name={item.name}
+              icon={item.icon}
+            />
+          ))}
         </ul>
         <DarkModeSwitch />
         <BurguerMenu click={handleMobileMenu} state={burgerState} />
@@ -56,30 +72,16 @@ function Navbar() {
             isMobileMenuOpen
               ? " top-20 z-50"
               : "top-16 -z-50 opacity-0 invisible"
-          } lg:hidden absolute left-0 bg-SoftWhite w-full border-b-2 dark:text-white dark:bg-DarkBlue dark:border-DarkBlue transition-all`}
+          } sm:hidden flex flex-col gap-3 pb-3 absolute left-0 text-DarkBlue bg-SoftWhite w-full border-b-2 dark:text-SoftWhite dark:bg-DarkBlue dark:border-DarkBlue transition-all`}
         >
-          <NavItemMobile refa="" name="Dashboard" click={handleMobileMenu} />
-          <NavItemMobile
-            refa="profile"
-            name="User profile"
-            click={handleMobileMenu}
-          />
-          <NavItemMobile refa="events" name="Events" click={handleMobileMenu} />
-          <NavItemMobile
-            refa="shopping_cart"
-            name="Shopping Cart"
-            click={handleMobileMenu}
-          />
-          <NavItemMobile
-            refa="exchange_ticket"
-            name="Exchange ticket"
-            click={handleMobileMenu}
-          />
-          <NavItemMobile
-            refa="create_event"
-            name="Create an Event"
-            click={handleMobileMenu}
-          />
+          {navigation.map((item, index) => (
+            <NavItemMobile
+              key={index}
+              href={item.href}
+              name={item.name}
+              click={handleMobileMenu}
+            />
+          ))}
         </ul>
       </nav>
       {isMobileMenuOpen ? (
@@ -107,7 +109,7 @@ const BurguerMenu = ({ click, state }) => {
 
   return (
     <div
-      className="lg:hidden relative w-8 h-6"
+      className="sm:hidden relative w-8 h-6"
       onClick={() => {
         handleMenuClick();
         click();
@@ -132,14 +134,14 @@ const BurguerMenu = ({ click, state }) => {
   );
 };
 
-// Componenete para reutilizar codigo
+// Componente para reutilizar codigo
 
-const NavItemMobile = ({ refa = "", name = "Link", click }) => {
+const NavItemMobile = ({ href = "", name = "Link", click }) => {
   return (
-    <li className="m-4 text-center">
+    <li className="text-center">
       <NavLink
-        to={`/${refa}`}
-        className="py-2 px-5"
+        to={`${href}`}
+        className="py-1 px-5 hover:font-medium hover:text-DarkViolet dark:hover:text-SoftViolet"
         onClick={() => {
           click();
         }}
@@ -150,14 +152,18 @@ const NavItemMobile = ({ refa = "", name = "Link", click }) => {
   );
 };
 
-const NavItemDesktop = ({ refa = "", name = "Link" }) => {
+const NavItemDesktop = ({ href = "", name = "Link", icon }) => {
   return (
-    <li className="flex-initial">
+    <li className={`${icon ? "px-1" : " flex-initial"}`}>
       <NavLink
-        to={`/${refa}`}
-        className="py-1 mx-2 border-DarkViolet hover:text-DarkViolet dark:hover:text-SoftViolet hover:border-b-2 dark:border-SoftViolet"
+        to={`${href}`}
+        className={`${
+          icon
+            ? "text-xl h-6 flex items-center"
+            : "py-1 border-DarkViolet hover:border-b-2"
+        } hover:text-DarkViolet dark:hover:text-SoftViolet dark:border-SoftViolet`}
       >
-        {name}
+        {icon ? icon : name}
       </NavLink>
     </li>
   );

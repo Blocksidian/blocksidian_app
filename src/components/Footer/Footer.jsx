@@ -43,7 +43,7 @@ function footer() {
       <article className="md:flex md:justify-evenly">
         <section className="flex justify-center gap-8 items-center sm:inline">
           <NavLink to="" className="flex justify-center">
-            <img src={imageDesktop} alt="Desktop Logo" className="h-10" />
+            <img src={imageDesktop} alt="Desktop Logo" className="h-10 hover:drop-shadow" />
           </NavLink>
           <ul className="flex flex-wrap justify-center gap-3 my-5">
             <FooterItemsSocialNav items={navigation.social} />
@@ -115,7 +115,7 @@ const FooterItemsSocialNav = ({ items }) => {
           <a
             href={`${item.href}`}
             target="blank"
-            className={`hover:text-black dark:hover:text-white`}
+            className="hover:text-black dark:hover:text-white"
           >
             {item.icon}
           </a>
