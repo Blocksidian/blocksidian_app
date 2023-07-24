@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink } from "react-router-dom";
+import { Fade } from "@successtar/react-reveal";
 import DarkModeSwitch from "../DarkMode/DarkMode";
 import imageMobile from "../../assets/LogoHexagon.svg";
 import imageDesktopW from "../../assets/WhiteLogoXL.svg";
@@ -54,25 +55,27 @@ function Navbar() {
   return (
     <>
       <nav className="sticky top-0 z-50 px-3 py-2 flex gap-3 place-items-center bg-SoftWhite dark:bg-DarkBlue md:py-3 transition">
-        <NavLink
-          to=""
-          title="Bloksidian page"
-          className="flex-initial"
-          onClick={handleMobileMenuLogo}
-        >
-          <img
-            src={imageMobile}
-            alt="Mobile Logo"
-            title="Navbar Mobile Logo of Blocsidian"
-            className="md:hidden h-16 hover:drop-shadow"
-          />
-          <img
-            src={imageDesktop}
-            alt="Desktop Logo"
-            title="Navbar Desktop Logo of Blocsidian"
-            className="hidden md:inline-block h-14 hover:drop-shadow"
-          />
-        </NavLink>
+        <Fade duration={3000}>
+          <NavLink
+            to=""
+            title="Bloksidian page"
+            className="flex-initial"
+            onClick={handleMobileMenuLogo}
+          >
+            <img
+              src={imageMobile}
+              alt="Mobile Logo"
+              title="Navbar Mobile Logo of Blocsidian"
+              className="md:hidden h-16 hover:drop-shadow"
+            />
+            <img
+              src={imageDesktop}
+              alt="Desktop Logo"
+              title="Navbar Desktop Logo of Blocsidian"
+              className="hidden md:inline-block h-14 hover:drop-shadow"
+            />
+          </NavLink>
+        </Fade>
         <div className="flex-auto"></div>
         {/* Desktop Menu */}
         <ul className="hidden text-DarkBlue gap-3 flex-none place-items-center dark:text-SoftWhite sm:flex">

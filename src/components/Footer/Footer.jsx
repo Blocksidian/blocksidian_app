@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink } from "react-router-dom";
+import { Fade } from "@successtar/react-reveal";
 import imageDesktopW from "../../assets/WhiteLogoXL.svg";
 import imageDesktopB from "../../assets/BlackLogoXL.svg";
 import { FaYoutube, FaGithub } from "react-icons/fa";
@@ -40,18 +41,20 @@ function footer() {
     <footer className="sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
       <article className="md:flex md:justify-evenly">
         <section className="flex justify-center gap-8 items-center sm:inline">
-          <NavLink
-            to=""
-            title="Bloksidian page"
-            className="flex justify-center"
-          >
-            <img
-              src={imageDesktop}
-              alt="Desktop Logo"
-              title="Footer Logo of Blocsidian"
-              className="h-10 hover:drop-shadow"
-            />
-          </NavLink>
+          <Fade duration={3000}>
+            <NavLink
+              to=""
+              title="Bloksidian page"
+              className="flex justify-center"
+            >
+              <img
+                src={imageDesktop}
+                alt="Desktop Logo"
+                title="Footer Logo of Blocsidian"
+                className="h-10 w-44 hover:drop-shadow"
+              />
+            </NavLink>
+          </Fade>
           <ul className="flex flex-wrap justify-center gap-3 my-5">
             <FooterItemsSocialNav items={navigation.social} />
           </ul>

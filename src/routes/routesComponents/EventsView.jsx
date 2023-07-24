@@ -1,18 +1,18 @@
-import { PageTwoContextProvider } from "../../context/PageTwoContext";
+import { EventsContextProvider } from "../../context/EventsContext";
 import AnimatedTransition from "../AnimatedTransition";
 import { Helmet } from "react-helmet";
 
-function PageTwoView() {
+function Events() {
   return (
     <AnimatedTransition>
-      <PageTwoContextProvider>
+      <EventsContextProvider>
         <Helmet>
           <title>Blocksidian | Events</title>
         </Helmet>
         <h1 className="dark:text-white">Pantalla de eventos</h1>
-      </PageTwoContextProvider>
+      </EventsContextProvider>
     </AnimatedTransition>
   );
 }
 
-export default PageTwoView;
+export default Events;
