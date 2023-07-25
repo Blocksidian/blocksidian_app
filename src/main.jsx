@@ -10,7 +10,7 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalContextProvider>
-      <main className="bg-white flex flex-col min-h-screen dark:bg-DarkMode transition">
+      <main id="main" className="bg-white flex flex-col justify-between min-h-screen dark:bg-DarkMode transition">
         <Router>
           <Navbar />
           <div className="flex-1">

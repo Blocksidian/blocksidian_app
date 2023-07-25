@@ -24,9 +24,9 @@ export const Hero = () => {
   return (
     <section
       id="hero"
-      className="h-[calc(100vh-80px)] pb-20 flex justify-center items-center "
+      className="h-[calc(100vh-176px)] pb-20 flex justify-center items-center "
     >
-      <Fade left duration={3000}>
+      <Fade left duration={1000}>
         <section className="">
           <p className="uppercase font-semibold text-lg text-purple-800 text-center md:text-left dark:text-purple-400">
             Sign up today
@@ -43,15 +43,21 @@ export const Hero = () => {
             transparency!
           </h2>
           <div className="flex flex-col xs:flex-row justify-center md:justify-start gap-2">
-            <button className="p-2 px-4 mx-10 xs:mx-0 bg-purple-500 rounded text-white hover:bg-purple-800">
+            <a
+              href="#steps"
+              className="p-2 px-4 mx-10 xs:mx-0 bg-purple-500 rounded text-white hover:bg-purple-800"
+            >
               More Information
-            </button>
-            <button className="flex justify-center items-center p-2 px-4 mx-10 xs:mx-0 bg-transparent rounded hover:text-purple-500 dark:text-white dark:hover:text-purple-500">
+            </a>
+            <a
+              href="#presentation"
+              className="flex justify-center items-center p-2 px-4 mx-10 xs:mx-0 bg-transparent rounded hover:text-purple-500 dark:text-white dark:hover:text-purple-500"
+            >
               <span className="me-2 text-2xl text-purple-500">
                 <FaRegCirclePlay />
               </span>
               Presentation
-            </button>
+            </a>
           </div>
         </section>
       </Fade>
@@ -74,7 +80,7 @@ export const AboutUs = () => {
   return (
     <section
       id="aboutus"
-      className="xs:px-2 md:px-16 lg:px-16 xl:px-20 mx-auto w-11/12 xs:w-5/6"
+      className="pt-24 xs:px-2 sm:px-6 md:px-10 lg:px-16 xl:px-20 mx-auto w-11/12 xs:w-5/6"
     >
       <Fade duration={2500}>
         <h2 className="text-2xl text-center font-bold text-gray-900 dark:text-white md:text-4xl">
@@ -115,7 +121,7 @@ export const VideoPresentation = () => {
   return (
     <section
       id="presentation"
-      className="-mx-2 xs:mx-auto max-w-4xl my-8 sm:mb-20 sm:mt-16"
+      className="-mx-2 pt-24 xs:mx-auto max-w-4xl sm:pt-28"
     >
       <Fade duration={2000}>
         <div className="relative" style={{ paddingBottom: "56.25%" }}>
@@ -137,44 +143,50 @@ export const VideoPresentation = () => {
 
 export const Steps = () => {
   return (
-    <section id="steps" className="z-0 py-10 text-center">
-      <h2 className="font-bold text-2xl sm:text-4xl mb-12 leading-normal text-black dark:text-white">
-        Get started in just a few minutes
-      </h2>
+    <section id="steps" className="z-0 py-10 pt-24 text-center">
+      <Fade down delay={200}>
+        <h2 className="font-bold text-2xl sm:text-4xl mb-12 leading-normal text-black dark:text-white">
+          Get started in just a few minutes
+        </h2>
+      </Fade>
       <div className="lg:flex justify-center gap-20">
-        <StepsItems
-          delay={450}
-          src={signup}
-          title={"Explore Events"}
-          description={
-            "Explore our wide selection of events and choose the one you like the most."
-          }
-        />
-        <StepsItems
-          delay={550}
-          src={buy}
-          title={"Buy Tickets"}
-          description={
-            "Select the number of tickets you want and make a secure transaction with our blockchain technology."
-          }
-        />
-        <StepsItems
-          delay={650}
-          src={bank}
-          title={"Validate Tickets"}
-          description={
-            "Once the purchase is made, your tickets will be linked to your blockchain identity, which guarantees their authenticity and avoids duplicity."
-          }
-        />
-        <StepsItems
-          delay={750}
-          src={deal}
-          last={true}
-          title={"Enjoy your Event"}
-          description={
-            "Arrive at the event with complete confidence, knowing that your tickets are legitimate and that you have contributed to the fight against counterfeit tickets."
-          }
-        />
+        <div className="md:flex justify-center gap-20">
+          <StepsItems
+            delay={450}
+            src={signup}
+            title={"Explore Events"}
+            description={
+              "Explore our wide selection of events and choose the one you like the most."
+            }
+          />
+          <StepsItems
+            delay={550}
+            src={buy}
+            title={"Buy Tickets"}
+            description={
+              "Select the number of tickets you want and make a secure transaction with our blockchain technology."
+            }
+          />
+        </div>
+        <div className="md:flex justify-center gap-20">
+          <StepsItems
+            delay={650}
+            src={bank}
+            title={"Validate Tickets"}
+            description={
+              "Once the purchase is made, your tickets will be linked to your blockchain identity, which guarantees their authenticity and avoids duplicity."
+            }
+          />
+          <StepsItems
+            delay={750}
+            src={deal}
+            last={true}
+            title={"Enjoy your Event"}
+            description={
+              "Arrive at the event with complete confidence, knowing that your tickets are legitimate and that you have contributed to the fight against counterfeit tickets."
+            }
+          />
+        </div>
       </div>
     </section>
   );
@@ -188,7 +200,7 @@ export const StepsItems = ({
   description = "",
 }) => {
   return (
-    <Fade up delay={delay}>
+    <Fade left delay={delay}>
       <div className="text-center px-4 mt-4 lg:mt-0">
         <div className="relative lg:h-36 xl:h-44">
           <img

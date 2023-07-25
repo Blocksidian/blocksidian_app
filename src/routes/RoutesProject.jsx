@@ -22,9 +22,9 @@ function RoutesProject() {
         {/* Vista de Error */}
         <Route path="*" element={<ErrorView />} />
         {/* Todas las Vistas */}
-        <Route path="/" element={<HomeView />} />
+        <Route path="/" element={<LandingPageView />} />
+        <Route path="/home" element={<HomeView />} />
         <Route path="/events" element={<EventsView />} />
-        <Route path="/exchange_ticket" element={<LandingPageView />} />
       </Routes>
     </AnimatePresence>
   );
