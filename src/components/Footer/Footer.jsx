@@ -38,7 +38,7 @@ function footer() {
   };
 
   return (
-    <footer className="sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
+    <footer className="z-10 sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
       <article className="md:flex md:justify-evenly">
         <section className="flex justify-center gap-8 items-center sm:inline">
           <Fade duration={3000}>
