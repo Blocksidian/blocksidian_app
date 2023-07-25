@@ -330,16 +330,29 @@ const NavItemMobile = ({
   return (
     <>
       <li className="text-center">
-        <NavLink
-          title={title}
-          to={`${href}`}
-          className="py-1 px-5 hover:font-medium hover:text-DarkViolet dark:hover:text-SoftViolet"
-          onClick={() => {
-            click();
-          }}
-        >
-          {name}
-        </NavLink>
+        {section ? (
+          <a
+            title={title}
+            href={section}
+            className="py-1 px-5 hover:font-medium hover:text-DarkViolet dark:hover:text-SoftViolet"
+            onClick={() => {
+              click();
+            }}
+          >
+            {name}
+          </a>
+        ) : (
+          <NavLink
+            title={title}
+            to={`${href}`}
+            className="py-1 px-5 hover:font-medium hover:text-DarkViolet dark:hover:text-SoftViolet"
+            onClick={() => {
+              click();
+            }}
+          >
+            {name}
+          </NavLink>
+        )}
       </li>
     </>
   );
@@ -365,18 +378,16 @@ const NavItemDesktop = ({
           {name}
         </a>
       ) : button ? (
-        <>
-          <NavLink
-            to={`${href}`}
-            className={`${
-              style === 1
-                ? "text-purple-400 border-purple-400 hover:bg-purple-800 hover:border-purple-800 hover:text-white dark:text-white px-6 py-1.5"
-                : "text-white bg-purple-400 hover:bg-purple-800 px-8 py-2 border-none"
-            } text-sm border-2 rounded-full font-medium transition duration-500`}
-          >
-            {name}
-          </NavLink>
-        </>
+        <NavLink
+          to={`${href}`}
+          className={`${
+            style === 1
+              ? "text-purple-400 border-purple-400 hover:bg-purple-800 hover:border-purple-800 hover:text-white dark:text-white px-6 py-1.5"
+              : "text-white bg-purple-400 hover:bg-purple-800 px-8 py-2 border-none"
+          } text-sm border-2 rounded-full font-medium transition duration-500`}
+        >
+          {name}
+        </NavLink>
       ) : (
         <NavLink
           title={title}

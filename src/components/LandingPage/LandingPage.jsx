@@ -45,7 +45,7 @@ export const Hero = () => {
           <div className="flex flex-col xs:flex-row justify-center md:justify-start gap-2">
             <a
               href="#steps"
-              className="p-2 px-4 mx-10 xs:mx-0 bg-purple-500 rounded text-white hover:bg-purple-800"
+              className="text-center p-2 px-4 mx-10 xs:mx-0 bg-purple-500 rounded text-white hover:bg-purple-800"
             >
               More Information
             </a>
