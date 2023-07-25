@@ -70,7 +70,7 @@ function footer() {
               <NavLink
                 to=""
                 title="Bloksidian page"
-                className="flex justify-center"
+                className="flex w-fit mx-auto"
               >
                 <img
                   src={imageDesktop}

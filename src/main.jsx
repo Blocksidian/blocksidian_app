@@ -13,9 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <main id="main" className="bg-white flex flex-col justify-between min-h-screen dark:bg-DarkMode transition">
         <Router>
           <Navbar />
-          <div className="flex-1">
-            <RoutesProject />
-          </div>
+          <RoutesProject />
           <Footer />
         </Router>
       </main>
