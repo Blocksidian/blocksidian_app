@@ -1,6 +1,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { GlobalContextProvider } from "./context/GlobalContext";
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import RoutesProject from "./routes/RoutesProject";
 import Navbar from "./components/Nav/Navbar";
@@ -10,8 +11,12 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalContextProvider>
-      <main id="main" className="bg-white flex flex-col justify-between min-h-screen dark:bg-DarkMode transition">
+      <main
+        id="main"
+        className="bg-white flex flex-col justify-between min-h-screen dark:bg-DarkMode transition"
+      >
         <Router>
+          <ScrollToTop />
           <Navbar />
           <RoutesProject />
           <Footer />
@@ -20,3 +25,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </GlobalContextProvider>
   </React.StrictMode>
 );
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 50);
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}

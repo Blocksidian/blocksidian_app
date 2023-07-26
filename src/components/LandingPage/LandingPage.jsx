@@ -24,7 +24,7 @@ export const Hero = () => {
   return (
     <section
       id="hero"
-      className="mt-8 mb-16 md:mt-16 md:mb-20 lg:mt-32 lg:mb-24 flex justify-center items-center "
+      className="pt-8 pb-16 md:pt-16 md:pb-20 lg:pt-32 lg:pb-24 flex justify-center items-center"
     >
       <Fade left duration={1000}>
         <section className="">

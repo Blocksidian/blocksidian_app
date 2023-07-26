@@ -6,8 +6,11 @@ import {
 } from "react-router-dom";
 
 import ErrorView from "./routesComponents/ErrorView";
-import HomeView from "./routesComponents/HomeView";
 import LandingPageView from "./routesComponents/LandingPageView";
+import ContactView from "./routesComponents/ContactView";
+
+// Logged
+import HomeView from "./routesComponents/HomeView";
 import EventsView from "./routesComponents/EventsView";
 // Ver rutas que pueden tener animaciones
 import { AnimatePresence } from "framer-motion";
@@ -23,6 +26,7 @@ function RoutesProject() {
         <Route path="*" element={<ErrorView />} />
         {/* Todas las Vistas */}
         <Route path="/" element={<LandingPageView />} />
+        <Route path="/contact" element={<ContactView />} />
         <Route path="/home" element={<HomeView />} />
         <Route path="/events" element={<EventsView />} />
       </Routes>
