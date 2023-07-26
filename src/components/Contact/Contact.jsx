@@ -98,7 +98,7 @@ const TextForm = ({
         name={title}
         value={state}
         onChange={(e) => setState(e.target.value)}
-        className="px-4 py-4 w-full rounded-md sm:text-sm border-2 dark:border-gray-800 bg-SoftWhite dark:bg-DarkBlue dark:text-white"
+        className="px-4 py-4 w-full rounded-md sm:text-sm border-2 dark:border-gray-800 bg-SoftWhite dark:bg-gray-900 dark:text-white"
         required
       />
     </>
@@ -121,7 +121,7 @@ const TextAreaForm = ({
         value={state}
         rows={rows}
         onChange={(e) => setState(e.target.value)}
-        className="px-4 py-4 w-full rounded-md sm:text-sm border-2 dark:border-gray-800 bg-SoftWhite dark:bg-DarkBlue dark:text-white"
+        className="px-4 py-4 w-full rounded-md sm:text-sm border-2 dark:border-gray-800 bg-SoftWhite dark:bg-gray-900 dark:text-white"
         required
       ></textarea>
     </>

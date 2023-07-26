@@ -2,7 +2,7 @@ import { EventsContextProvider } from "../../context/EventsContext";
 import AnimatedTransition from "../AnimatedTransition";
 import { Helmet } from "react-helmet";
 
-function Events() {
+function EventsView() {
   return (
     <AnimatedTransition>
       <EventsContextProvider>
@@ -15,4 +15,4 @@ function Events() {
   );
 }
 
-export default Events;
+export default EventsView;

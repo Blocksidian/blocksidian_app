@@ -164,7 +164,7 @@ const NavbarLandingPage = () => {
     { name: "Contact", href: "/contact", title: "Contact page" },
     {
       name: "Sign Up",
-      href: "/register",
+      href: "/signup",
       title: "Sign Up page",
       button: true,
       style: 1,

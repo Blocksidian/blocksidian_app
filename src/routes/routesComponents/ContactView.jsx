@@ -3,7 +3,7 @@ import AnimatedTransition from "../AnimatedTransition";
 import Contact from "../../components/Contact/Contact";
 import { Helmet } from "react-helmet";
 
-function Events() {
+function ContactView() {
   return (
     <AnimatedTransition>
       <ContactContextProvider>
@@ -16,4 +16,4 @@ function Events() {
   );
 }
 
-export default Events;
+export default ContactView;
