@@ -12,6 +12,8 @@ import LandingPageView from "./routesComponents/Unlogged/LandingPageView";
 import ContactView from "./routesComponents/Unlogged/ContactView";
 import LogInView from "./routesComponents/Unlogged/LogInView";
 import SignUpView from "./routesComponents/Unlogged/SignUpView";
+import PrivacyView from "./routesComponents/Unlogged/Privacy";
+import TermsView from "./routesComponents/Unlogged/Terms";
 
 // Vistas Ingresado
 import HomeView from "./routesComponents/Logged/HomeView";
@@ -31,6 +33,8 @@ function RoutesProject() {
       <Route path="/contact" element={<ContactView />} />
       <Route path="/signup" element={<SignUpView />} />
       <Route path="/login" element={<LogInView />} />
+      <Route path="/privacy" element={<PrivacyView />} />
+      <Route path="/terms" element={<TermsView />} />
 
       {/* Vistas Ingresado */}
       <Route path="/home" element={<HomeView />} />

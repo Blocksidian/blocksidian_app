@@ -23,11 +23,8 @@ function Navbar() {
     urlFirst === "/terms"
   ) {
     setUser(false);
-    console.log(false);
   } else {
     setUser(true);
-    console.log(urlFirst);
-    console.log(true);
   }
   return <>{user ? <NavbarLogged /> : <NavbarLandingPage />}</>;
 }
