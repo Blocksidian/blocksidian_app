@@ -21,7 +21,7 @@ export const Form = () => {
 
     const title = "Blocksidian Contact";
     const body = `Nombre: ${name}%0D%0D%0AEmail: ${email}%0D%0D%0AMensaje: ${message}%0D%0D`;
-    const url = `mailto:mierderthekat@hotmail.com?subject=${title}&body=${body}`;
+    const url = `mailto:blocksidian.inc@gmail.com?subject=${title}&body=${body}`;
     window.open(url, "_blank");
 
     setName("");
