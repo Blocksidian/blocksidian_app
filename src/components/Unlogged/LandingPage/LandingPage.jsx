@@ -1,10 +1,10 @@
 import { useLocation } from "react-router-dom";
-import imageHexagon from "../../assets/LogoFavicon.svg";
-import arrow from "../../assets/illustrations/arrow.svg";
-import bank from "../../assets/illustrations/banks.png";
-import buy from "../../assets/illustrations/buy.png";
-import deal from "../../assets/illustrations/deal.png";
-import signup from "../../assets/illustrations/signup.png";
+import imageHexagon from "../../../assets/LogoFavicon.svg";
+import arrow from "../../../assets/illustrations/arrow.svg";
+import bank from "../../../assets/illustrations/banks.png";
+import buy from "../../../assets/illustrations/buy.png";
+import deal from "../../../assets/illustrations/deal.png";
+import signup from "../../../assets/illustrations/signup.png";
 import { Fade } from "@successtar/react-reveal";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { useEffect } from "react";
@@ -142,7 +142,7 @@ export const VideoPresentation = () => {
       <Fade duration={2000}>
         <div className="relative" style={{ paddingBottom: "56.25%" }}>
           <div className="absolute w-full h-full">
-            <iframe
+          <iframe
               className="w-full h-full"
               src="https://www.youtube.com/embed/PaoAiBVGQu8"
               title="YouTube video player"

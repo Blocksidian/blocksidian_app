@@ -4,8 +4,8 @@ import { GlobalContextProvider } from "./context/GlobalContext";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import RoutesProject from "./routes/RoutesProject";
-import Navbar from "./components/Nav/Navbar";
-import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navigation/Nav/Navbar";
+import Footer from "./components/Navigation/Footer/Footer";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

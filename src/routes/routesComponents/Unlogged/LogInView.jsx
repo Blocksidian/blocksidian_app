@@ -1,6 +1,6 @@
-import { LogInContextProvider } from "../../context/LogInContext";
-import AnimatedTransition from "../AnimatedTransition";
-import LogIn from "../../components/Auth/LogIn";
+import { LogInContextProvider } from "../../../context/Unlogged/LogInContext";
+import AnimatedTransition from "../../AnimatedTransition";
+import LogIn from "../../../components/Unlogged/Auth/LogIn";
 import { Helmet } from "react-helmet";
 
 function LogInView() {

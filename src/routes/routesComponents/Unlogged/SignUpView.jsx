@@ -1,6 +1,6 @@
-import { SignUpContextProvider } from "../../context/SignUpContext";
-import AnimatedTransition from "../AnimatedTransition";
-import SignUp from "../../components/Auth/SignUp";
+import { SignUpContextProvider } from "../../../context/Unlogged/SignUpContext";
+import AnimatedTransition from "../../AnimatedTransition";
+import SignUp from "../../../components/Unlogged/Auth/SignUp";
 import { Helmet } from "react-helmet";
 
 function SignUpView() {

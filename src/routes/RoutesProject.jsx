@@ -8,14 +8,14 @@ import {
 import ErrorView from "./routesComponents/ErrorView";
 
 // Vistas Globales
-import LandingPageView from "./routesComponents/LandingPageView";
-import ContactView from "./routesComponents/ContactView";
-import LogInView from "./routesComponents/LogInView";
-import SignUpView from "./routesComponents/SignUpView";
+import LandingPageView from "./routesComponents/Unlogged/LandingPageView";
+import ContactView from "./routesComponents/Unlogged/ContactView";
+import LogInView from "./routesComponents/Unlogged/LogInView";
+import SignUpView from "./routesComponents/Unlogged/SignUpView";
 
 // Vistas Ingresado
-import HomeView from "./routesComponents/HomeView";
-import EventsView from "./routesComponents/EventsView";
+import HomeView from "./routesComponents/Logged/HomeView";
+import EventsView from "./routesComponents/Logged/EventsView";
 
 function RoutesProject() {
   // Detecta el cambio de pantalla y hacer transicion

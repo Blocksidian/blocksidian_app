@@ -1,6 +1,6 @@
-import { LandingPageContextProvider } from "../../context/LandingPageContext";
-import AnimatedTransition from "../AnimatedTransition";
-import LandingPage from "../../components/LandingPage/LandingPage";
+import { LandingPageContextProvider } from "../../../context/Unlogged/LandingPageContext";
+import AnimatedTransition from "../../AnimatedTransition";
+import LandingPage from "../../../components/Unlogged/LandingPage/LandingPage";
 import { Helmet } from "react-helmet";
 
 function LandingPageView() {

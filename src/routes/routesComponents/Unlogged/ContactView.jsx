@@ -1,6 +1,6 @@
-import { ContactContextProvider } from "../../context/ContactContext";
-import AnimatedTransition from "../AnimatedTransition";
-import Contact from "../../components/Contact/Contact";
+import { ContactContextProvider } from "../../../context/Unlogged/ContactContext";
+import AnimatedTransition from "../../AnimatedTransition";
+import Contact from "../../../components/Unlogged/Contact/Contact";
 import { Helmet } from "react-helmet";
 
 function ContactView() {

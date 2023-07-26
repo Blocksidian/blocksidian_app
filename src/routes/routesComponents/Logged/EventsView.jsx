@@ -1,5 +1,6 @@
-import { EventsContextProvider } from "../../context/EventsContext";
-import AnimatedTransition from "../AnimatedTransition";
+import { EventsContextProvider } from "../../../context/Logged/EventsContext";
+import AnimatedTransition from "../../AnimatedTransition";
+import Events from "../../../components/Logged/Events/Events";
 import { Helmet } from "react-helmet";
 
 function EventsView() {
@@ -9,7 +10,7 @@ function EventsView() {
         <Helmet>
           <title>Blocksidian | Events</title>
         </Helmet>
-        <h1 className="dark:text-white">Pantalla de eventos</h1>
+        <Events />
       </EventsContextProvider>
     </AnimatedTransition>
   );

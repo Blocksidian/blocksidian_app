@@ -1,17 +1,34 @@
 import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from "../../../context/GlobalContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Fade } from "@successtar/react-reveal";
 import DarkModeSwitch from "../DarkMode/DarkMode";
-import imageMobile from "../../assets/LogoHexagon.svg";
-import imageDesktopW from "../../assets/WhiteLogoXL.svg";
-import imageDesktopB from "../../assets/BlackLogoXL.svg";
+import imageMobile from "../../../assets/LogoHexagon.svg";
+import imageDesktopW from "../../../assets/WhiteLogoXL.svg";
+import imageDesktopB from "../../../assets/BlackLogoXL.svg";
 import { FaCartShopping, FaUser } from "react-icons/fa6";
 
 function Navbar() {
-  const { user, setUser } = useContext(GlobalContext);
-  setUser(false);
+  const location = useLocation();
+  const urlFirst = location.pathname;
 
+  const { user, setUser } = useContext(GlobalContext);
+
+  if (
+    urlFirst === "/" ||
+    urlFirst === "/contact" ||
+    urlFirst === "/signup" ||
+    urlFirst === "/login" ||
+    urlFirst === "/privacy" ||
+    urlFirst === "/terms"
+  ) {
+    setUser(false);
+    console.log(false);
+  } else {
+    setUser(true);
+    console.log(urlFirst);
+    console.log(true);
+  }
   return <>{user ? <NavbarLogged /> : <NavbarLandingPage />}</>;
 }
 
@@ -37,7 +54,7 @@ const NavbarLogged = () => {
   };
 
   const navigation = [
-    { name: "Dashboard", href: "/", title: "Dashboard page" },
+    { name: "Dashboard", href: "/home", title: "Dashboard page" },
     { name: "Events", href: "/events", title: "Events page" },
     {
       name: "Exchange ticket",
@@ -64,7 +81,7 @@ const NavbarLogged = () => {
       <nav className="sticky top-0 z-50 px-3 py-2 flex gap-3 place-items-center bg-SoftWhite dark:bg-DarkBlue md:py-3 transition">
         <Fade duration={3000}>
           <NavLink
-            to=""
+            to="/home"
             title="Bloksidian page"
             className="flex-initial"
             onClick={handleMobileMenuLogo}

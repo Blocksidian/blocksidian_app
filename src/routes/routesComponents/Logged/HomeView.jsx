@@ -1,6 +1,6 @@
-import { HomeContextProvider } from "../../context/HomeContext";
-import AnimatedTransition from "../AnimatedTransition";
-import Home from "../../components/Home/Home";
+import { HomeContextProvider } from "../../../context/Logged/HomeContext";
+import AnimatedTransition from "../../AnimatedTransition";
+import Home from "../../../components/Logged/Home/Home";
 import { Helmet } from "react-helmet";
 
 function HomeView() {

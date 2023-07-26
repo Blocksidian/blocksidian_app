@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { data } from "../data/homeData";
+import { data } from "../../data/homeData";
 
 export const HomeContext = createContext();
 
