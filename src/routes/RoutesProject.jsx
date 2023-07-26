@@ -12,16 +12,13 @@ import ContactView from "./routesComponents/ContactView";
 // Logged
 import HomeView from "./routesComponents/HomeView";
 import EventsView from "./routesComponents/EventsView";
-// Ver rutas que pueden tener animaciones
-import { AnimatePresence } from "framer-motion";
 
 function RoutesProject() {
   // Detecta el cambio de pantalla y hacer transicion
   const location = useLocation();
   return (
     // Indicamos con el key pathname es el url en la linea de Routes
-    <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
+    <Routes location={location} key={location.pathname}>
         {/* Vista de Error */}
         <Route path="*" element={<ErrorView />} />
         {/* Todas las Vistas */}
@@ -30,7 +27,6 @@ function RoutesProject() {
         <Route path="/home" element={<HomeView />} />
         <Route path="/events" element={<EventsView />} />
       </Routes>
-    </AnimatePresence>
   );
 }
 

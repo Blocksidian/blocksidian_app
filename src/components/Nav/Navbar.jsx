@@ -157,7 +157,7 @@ const NavbarLandingPage = () => {
     { name: "Home", href: "/", title: "Home page" },
     {
       name: "About Us",
-      href: "/",
+      href: "/#aboutus",
       title: "About Us section",
       section: "#aboutus",
     },
@@ -178,6 +178,7 @@ const NavbarLandingPage = () => {
     },
   ];
 
+  // Verifica si esta o no esta en el home, para hacer referencias o scrolls
   urlFirst === "/"
     ? (navigation[0].section = "#main")
     : delete navigation[0].section;

@@ -19,7 +19,7 @@ function footer() {
       { name: "Other", href: "/other", title: "Others Page" },
     ],
     support: [{ name: "Contact", href: "/contact", title: "Contact Page" }],
-    company: [{ name: "About", href: "/", title: "About Page" }],
+    company: [{ name: "About", href: "/#aboutus", title: "About Page" }],
     services: [
       { name: "Privacy", href: "/privacy", title: "Privacy Page" },
       { name: "Terms", href: "/terms", title: "Terms Page" },

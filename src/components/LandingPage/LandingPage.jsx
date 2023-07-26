@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import imageHexagon from "../../assets/LogoFavicon.svg";
 import arrow from "../../assets/illustrations/arrow.svg";
 import bank from "../../assets/illustrations/banks.png";
@@ -6,8 +7,23 @@ import deal from "../../assets/illustrations/deal.png";
 import signup from "../../assets/illustrations/signup.png";
 import { Fade } from "@successtar/react-reveal";
 import { FaRegCirclePlay } from "react-icons/fa6";
+import { useEffect } from "react";
 
 function LandingPage() {
+  const location = useLocation();
+  const urlLast = location.hash; // Traer el dato de id
+  const urlLastWithoutHash = urlLast.replace(/^#/, ""); // Eliminar el símbolo "#" de la cadena
+
+  useEffect(() => {
+    // Navegar a la seccion correspondiente
+    if (urlLast) {
+      const section = document.getElementById(urlLastWithoutHash);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   return (
     <>
       <article className="container mx-auto px-2 xs:px-4 sm:px-6">
