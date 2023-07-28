@@ -101,7 +101,7 @@ export const EventCard = ({
     <>
       <div className="w-72 flex flex-col bg-white dark:bg-DarkBlue rounded-2xl  shadow-md hover:shadow-xl dark:shadow-DarkBlue">
         {/*<img src="" alt="" className="h-28 object-fit:cover object-position:center bg-purple-950 rounded-t-2xl" />*/}
-        <div className="h-28 flex bg-purple-950 rounded-t-2xl text-white text-2xl font-extrabold select-none">
+        <div className="h-28 p-3 flex bg-purple-950 rounded-t-2xl text-white text-2xl font-extrabold select-none">
           <p className="m-auto">NOT IMAGE</p>
         </div>
         <BodyCard
@@ -162,12 +162,13 @@ export const PopularEventCard = ({
           alt=""
           className="w-24 h-full object-fit:cover object-position:center bg-purple-950 rounded-l-2xl select-none"
         /> */}
-        <div className="w-24 h-full flex items-center bg-purple-950 rounded-l-2xl text-center text-white text-lg font-bold select-none">
+        <div className="w-24 h-full p-3 flex items-center bg-purple-950 rounded-l-2xl text-center text-white text-lg font-bold select-none">
           <p className="">NOT IMAGE</p>
         </div>
-        <PopularBodyCard
+        <BodyCard
           name={name}
           date={date}
+          hour={false}
           place={place}
           placeURL={placeURL}
         />
@@ -176,29 +177,13 @@ export const PopularEventCard = ({
   );
 };
 
-export const PopularBodyCard = ({ name, date, place, placeURL }) => {
-  return (
-    <div className="flex-1 flex flex-col gap-3 p-4 break-all">
-      <TitleCard name={name} />
-      <div className="flex flex-col gap-2 flex-1 break-all">
-        <TextCard text={date} icon={<FaRegCalendar />} />
-        <TextCard
-          text={place}
-          icon={<FaMapLocationDot />}
-          placeURL={placeURL}
-        />
-      </div>
-    </div>
-  );
-};
-
 export const BodyCard = ({ name, date, hour, place, placeURL }) => {
   return (
     <div className="flex-1 flex flex-col gap-3 p-4 break-all">
       <TitleCard name={name} />
-      <div className="flex flex-col gap-2 flex-1 break-all">
+      <div className="flex flex-col gap-2 flex-1">
         <TextCard text={date} icon={<FaRegCalendar />} />
-        <TextCard text={hour} icon={<FaRegClock />} />
+        {hour ? <TextCard text={hour} icon={<FaRegClock />} /> : <></>}
         <TextCard
           text={place}
           icon={<FaMapLocationDot />}

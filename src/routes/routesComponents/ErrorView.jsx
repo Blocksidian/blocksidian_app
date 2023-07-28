@@ -18,7 +18,7 @@ export default ErrorView;
 function ErrorItem() {
   return (
     <>
-      <section className="py-10 flex flex-col items-center">
+      <section className="py-10 my-auto flex flex-col items-center">
         <h1 className="w-fit text-5xl font-semibold bg-clip-text text-transparent bg-gradient-to-l from-purple-400 to-purple-800">
           404
         </h1>

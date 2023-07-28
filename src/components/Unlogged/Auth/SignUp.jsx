@@ -5,7 +5,7 @@ import { TextForm, ButtonForm, Popover } from "./LogIn";
 const SignUp = () => {
   return (
     <>
-      <article className="container mx-auto px-2 xs:px-4 sm:px-6">
+      <article className="container my-auto px-2 xs:px-4 sm:px-6">
         <SignUpForm />
       </article>
     </>
