@@ -12,21 +12,24 @@ function Navbar() {
   const location = useLocation();
   const urlFirst = location.pathname;
 
-  const { user, setUser } = useContext(GlobalContext);
+  const { navbar, setNavbar } = useContext(GlobalContext);
 
-  if (
-    urlFirst === "/" ||
-    urlFirst === "/contact" ||
-    urlFirst === "/signup" ||
-    urlFirst === "/login" ||
-    urlFirst === "/privacy" ||
-    urlFirst === "/terms"
-  ) {
-    setUser(false);
-  } else {
-    setUser(true);
-  }
-  return <>{user ? <NavbarLogged /> : <NavbarLandingPage />}</>;
+  useEffect(() => {
+    if (
+      urlFirst === "/" ||
+      urlFirst === "/contact" ||
+      urlFirst === "/signup" ||
+      urlFirst === "/login" ||
+      urlFirst === "/privacy" ||
+      urlFirst === "/terms"
+    ) {
+      setNavbar(false);
+    } else {
+      setNavbar(true);
+    }
+  }, [urlFirst]);
+
+  return <>{navbar ? <NavbarLogged /> : <NavbarLandingPage />}</>;
 }
 
 const NavbarLogged = () => {

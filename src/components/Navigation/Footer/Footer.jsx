@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Fade } from "@successtar/react-reveal";
@@ -7,7 +7,7 @@ import imageDesktopB from "../../../assets/BlackLogoXL.svg";
 import { FaYoutube, FaGithub } from "react-icons/fa";
 
 function footer() {
-  const { darkMode } = useContext(GlobalContext);
+  const { darkMode, footer, setFooter } = useContext(GlobalContext);
   const imageDesktop = darkMode ? imageDesktopW : imageDesktopB;
 
   const location = useLocation();
@@ -48,83 +48,163 @@ function footer() {
     ? delete navigation.company[0].section
     : (navigation.company[0].section = "#aboutus");
 
+  useEffect(() => {
+    if (
+      urlFirst === "/" ||
+      urlFirst === "/contact" ||
+      urlFirst === "/privacy" ||
+      urlFirst === "/terms"
+    ) {
+      setFooter(false);
+    } else {
+      setFooter(true);
+    }
+  }, [urlFirst]);
+
   return (
-    <footer className="z-10 sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
-      <article className="md:flex md:justify-evenly">
-        <section className="flex justify-center gap-8 items-center sm:inline">
-          <Fade duration={3000}>
-            {urlFirst === "/" ? (
-              <a
-                href="#main"
-                title="Bloksidian page"
-                className="flex justify-center"
-              >
-                <img
-                  src={imageDesktop}
-                  alt="Desktop Logo"
-                  title="Footer Logo of Blocsidian"
-                  className="h-10 w-44 hover:drop-shadow"
-                />
-              </a>
-            ) : (
-              <NavLink
-                to=""
-                title="Bloksidian page"
-                className="flex w-fit mx-auto"
-              >
-                <img
-                  src={imageDesktop}
-                  alt="Desktop Logo"
-                  title="Footer Logo of Blocsidian"
-                  className="h-10 w-44 hover:drop-shadow"
-                />
-              </NavLink>
-            )}
-          </Fade>
-          <ul className="flex flex-wrap justify-center gap-3 my-5">
-            <FooterItemsSocialNav items={navigation.social} />
-          </ul>
-        </section>
-        <section className="hidden sm:inline">
-          <ul className="flex flex-wrap justify-evenly sm:justify-center text-center">
-            <li className="dark:text-SoftWhite sm:flex">
-              <div>
-                <p className="hover:font-medium cursor-default">Visit Us</p>
-                <ul>
-                  <FooterItemsNav items={navigation.solutions} />
-                </ul>
-              </div>
-              <div>
-                <p className="hover:font-medium cursor-default">Call Us</p>
-                <ul>
-                  <FooterItemsNav items={navigation.support} />
-                </ul>
-              </div>
-            </li>
-            <li className="dark:text-SoftWhite sm:flex">
-              <div>
-                <p className="hover:font-medium cursor-default">Company</p>
-                <ul>
-                  <FooterItemsNav items={navigation.company} />
-                </ul>
-              </div>
-              <div>
-                <p className="hover:font-medium cursor-default">Services</p>
-                <ul>
-                  <FooterItemsNav items={navigation.services} />
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </section>
-      </article>
-      <article className="hidden sm:flex flex-col text-center pt-8 mt-10 mx-4 border-t border-SoftGray cursor-default xs:flex-row xs:justify-center dark:text-SoftWhite">
-        <span>© 2023 Blocksidian,</span>
-        <span className="xs:ms-1">Inc. All rights reserved.</span>
-      </article>
-    </footer>
+    <>
+      {footer ? (
+        <FooterLogged
+          navigation={navigation}
+          imageDesktop={imageDesktop}
+          urlFirst={urlFirst}
+        />
+      ) : (
+        <FooterUnLogged
+          navigation={navigation}
+          imageDesktop={imageDesktop}
+          urlFirst={urlFirst}
+        />
+      )}
+    </>
   );
 }
+
+const FooterLogged = ({ navigation, imageDesktop, urlFirst }) => {
+  return (
+    <>
+      <footer className="z-10 sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
+        <article className="md:flex md:justify-evenly">
+          <section className="flex justify-center gap-8 items-center">
+            <Fade duration={3000}>
+              {urlFirst === "/" ? (
+                <a
+                  href="#main"
+                  title="Bloksidian page"
+                  className="flex justify-center"
+                >
+                  <img
+                    src={imageDesktop}
+                    alt="Desktop Logo"
+                    title="Footer Logo of Blocsidian"
+                    className="h-10 w-44 hover:drop-shadow"
+                  />
+                </a>
+              ) : (
+                <NavLink
+                  to=""
+                  title="Bloksidian page"
+                  className="flex w-fit mx-auto"
+                >
+                  <img
+                    src={imageDesktop}
+                    alt="Desktop Logo"
+                    title="Footer Logo of Blocsidian"
+                    className="h-10 w-44 hover:drop-shadow"
+                  />
+                </NavLink>
+              )}
+            </Fade>
+            <ul className="flex flex-wrap justify-center gap-3 my-5">
+              <FooterItemsSocialNav items={navigation.social} />
+            </ul>
+          </section>
+        </article>
+      </footer>
+    </>
+  );
+};
+
+const FooterUnLogged = ({ navigation, imageDesktop, urlFirst }) => {
+  return (
+    <>
+      <footer className="z-10 pb-10 sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
+        <article className="md:flex md:justify-evenly">
+          <section className="flex justify-center gap-8 items-center sm:inline">
+            <Fade duration={3000}>
+              {urlFirst === "/" ? (
+                <a
+                  href="#main"
+                  title="Bloksidian page"
+                  className="flex justify-center"
+                >
+                  <img
+                    src={imageDesktop}
+                    alt="Desktop Logo"
+                    title="Footer Logo of Blocsidian"
+                    className="h-10 w-44 hover:drop-shadow"
+                  />
+                </a>
+              ) : (
+                <NavLink
+                  to=""
+                  title="Bloksidian page"
+                  className="flex w-fit mx-auto"
+                >
+                  <img
+                    src={imageDesktop}
+                    alt="Desktop Logo"
+                    title="Footer Logo of Blocsidian"
+                    className="h-10 w-44 hover:drop-shadow"
+                  />
+                </NavLink>
+              )}
+            </Fade>
+            <ul className="flex flex-wrap justify-center gap-3 my-5">
+              <FooterItemsSocialNav items={navigation.social} />
+            </ul>
+          </section>
+          <section>
+            <ul className="flex flex-wrap justify-evenly sm:justify-center text-center">
+              <li className="dark:text-SoftWhite sm:flex">
+                <div>
+                  <p className="hover:font-medium cursor-default">Visit Us</p>
+                  <ul>
+                    <FooterItemsNav items={navigation.solutions} />
+                  </ul>
+                </div>
+                <div>
+                  <p className="hover:font-medium cursor-default">Call Us</p>
+                  <ul>
+                    <FooterItemsNav items={navigation.support} />
+                  </ul>
+                </div>
+              </li>
+              <li className="dark:text-SoftWhite sm:flex">
+                <div>
+                  <p className="hover:font-medium cursor-default">Company</p>
+                  <ul>
+                    <FooterItemsNav items={navigation.company} />
+                  </ul>
+                </div>
+                <div>
+                  <p className="hover:font-medium cursor-default">Services</p>
+                  <ul>
+                    <FooterItemsNav items={navigation.services} />
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </article>
+        <article className="flex flex-col text-center pt-8 mt-10 mx-4 border-t border-SoftGray cursor-default xs:flex-row xs:justify-center dark:text-SoftWhite">
+          <span>© 2023 Blocksidian,</span>
+          <span className="xs:ms-1">Inc. All rights reserved.</span>
+        </article>
+      </footer>
+    </>
+  );
+};
 
 const FooterItemsNav = ({ items }) => {
   return (

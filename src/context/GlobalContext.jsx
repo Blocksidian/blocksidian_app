@@ -5,6 +5,8 @@ export const GlobalContext = createContext();
 export function GlobalContextProvider(props) {
   const [darkMode, setDarkMode] = useState(true);
   const [user, setUser] = useState(false);
+  const [navbar, setNavbar] = useState(false);
+  const [footer, setFooter] = useState(false);
 
   const useDarkMode = () => {
     const [enabled, setEnabled] = useLocalStorage("dark-theme");
@@ -27,8 +29,10 @@ export function GlobalContextProvider(props) {
       value={{
         useDarkMode,
         darkMode,
-        setUser,
-        user,
+        setNavbar,
+        navbar,
+        setFooter,
+        footer,
       }}
     >
       {props.children}
