@@ -31,7 +31,7 @@ const Home = () => {
             * Username *
           </span>
         </h1>
-        <section className="mb-6 lg:flex">
+        <section className="mb-6 px-0 2xl:px-12 3xl:px-20 lg:flex">
           <article className="flex-auto">
             <h2 className="my-6 text-center text-2xl font-bold dark:text-white">
               Available Tickets
