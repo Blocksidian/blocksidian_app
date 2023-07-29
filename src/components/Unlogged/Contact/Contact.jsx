@@ -30,8 +30,8 @@ export const Form = () => {
   };
 
   return (
-    <div className="my-10 flex items-center justify-center w-full">
-      <div className="px-4 py-8 w-full max-w-screen-md bg-white dark:bg-DarkMode dark:shadow-DarkBlue shadow-xl rounded-lg">
+    <div className="my-10 flex items-center justify-center">
+      <div className="px-4 py-8 w-full max-w-screen-md">
         <h2 className="text-center text-3xl font-bold mb-3 dark:text-white">
           Contact
         </h2>
