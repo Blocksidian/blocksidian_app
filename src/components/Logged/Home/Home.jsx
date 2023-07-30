@@ -1,26 +1,86 @@
+import { Fade } from "@successtar/react-reveal";
 import { FaRegCalendar, FaRegClock, FaMapLocationDot } from "react-icons/fa6";
 
 const Home = () => {
-  const availableEvents = [
+  const myEvents = [
     {
-      image: "Angeles Azules",
+      image: "https://placehold.jp/1200x720.png",
       name: "Junior H",
-      date: "22 / 08 / 2023",
+      date: "22/08/2023",
       hour: "09:00 PM",
       place: "Palenque FENADU",
-      urlPlace: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
       href: "/home",
     },
     {
-      image: "Angeles Azules",
+      image: "",
       name: "Angeles Azules",
-      date: "22 / 08 / 2023",
+      date: "22/08/2023",
       hour: "06:00 PM",
       place: "Palenque FENADU",
-      urlPlace: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+    {
+      image: "",
+      name: "Julion Alvarez",
+      date: "29/07/2023",
+      hour: "02:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
       href: "/home",
     },
   ];
+
+  const popularEvents = [
+    {
+      image: "https://placehold.jp/1200x720.png",
+      name: "Julion Alvarez",
+      date: "22/08/2023",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+    {
+      image: "",
+      name: "Angeles Azules",
+      date: "22/08/2023",
+      hour: "06:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+    {
+      image: "",
+      name: "Angeles Azules",
+      date: "30/07/2023",
+      hour: "06:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+  ];
+
+  // Obtenemos la fecha actual y el comienzo del día de hoy
+  const today = new Date();
+  const startOfDay = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
+
+  // Filtrar eventos según si la fecha es menor al día actual
+  const currentlyEvents = myEvents.filter((evento) => {
+    const [day, month, year] = evento.date.split("/").map(Number);
+    const eventDate = new Date(year, month - 1, day);
+    return eventDate >= startOfDay;
+  });
+
+  const pastEvents = myEvents.filter((evento) => {
+    const [day, month, year] = evento.date.split("/").map(Number);
+    const eventDate = new Date(year, month - 1, day);
+    return eventDate < startOfDay;
+  });
 
   return (
     <>
@@ -37,33 +97,44 @@ const Home = () => {
               Available Tickets
             </h2>
             <section className="flex flex-wrap gap-5 justify-center">
-              <EventCard
-                name="Julion Alvarez"
-                hour="09:00 PM"
-                date="22 / 08 / 2023"
-                place="Palenque FENADU"
-                placeURL="https://goo.gl/maps/pncs4PF9Ku6aKGm87"
-              />
-              <EventCard
-                name="Junior H"
-                hour="11:00 PM"
-                date="23 / 08 / 2023"
-                place="Palenque FENADU"
-                placeURL="https://goo.gl/maps/pncs4PF9Ku6aKGm87"
-              />
-              <EventCard />
+              {currentlyEvents.length ? (
+                currentlyEvents.map((item, index) => (
+                  <EventCard
+                    key={index}
+                    image={item.image}
+                    name={item.name}
+                    date={item.date}
+                    hour={item.hour}
+                    place={item.place}
+                    placeURL={item.placeURL}
+                    href={item.href}
+                    index={index}
+                  />
+                ))
+              ) : (
+                <NotFound />
+              )}
             </section>
             <h2 className="my-6 lg:mt-10 text-center text-2xl font-bold dark:text-white">
               Inactive Tickets
             </h2>
             <section className="flex flex-wrap gap-5 justify-center">
-              <DisableEventCard
-                name="Platanito"
-                hour="04:00 AM"
-                date="22 / 07 / 2023"
-                place="Palenque FENADU"
-              />
-              <DisableEventCard />
+              {pastEvents.length ? (
+                pastEvents.map((item, index) => (
+                  <DisableEventCard
+                    key={index}
+                    image={item.image}
+                    name={item.name}
+                    date={item.date}
+                    hour={item.hour}
+                    place={item.place}
+                    href={item.href}
+                    index={index}
+                  />
+                ))
+              ) : (
+                <NotFound />
+              )}
             </section>
           </article>
           <article className="flex-1">
@@ -71,14 +142,21 @@ const Home = () => {
               Popular Events
             </h2>
             <section className="flex flex-wrap gap-5 justify-center">
-              <PopularEventCard
-                name="Julion Alvarez"
-                date="22 / 08 / 2023"
-                place="Palenque FENADU"
-                placeURL="https://goo.gl/maps/pncs4PF9Ku6aKGm87"
-              />
-              <PopularEventCard />
-              <PopularEventCard />
+              {popularEvents.length ? (
+                popularEvents.map((item, index) => (
+                  <PopularEventCard
+                    key={index}
+                    image={item.image}
+                    name={item.name}
+                    date={item.date}
+                    place={item.place}
+                    href={item.href}
+                    index={index}
+                  />
+                ))
+              ) : (
+                <NotFound />
+              )}
             </section>
           </article>
         </section>
@@ -88,7 +166,7 @@ const Home = () => {
 };
 
 export const EventCard = ({
-  img,
+  image,
   name = "Event name",
   hour = "Event hour",
   date = "Event date",
@@ -96,14 +174,22 @@ export const EventCard = ({
   placeURL,
   enabled = true,
   action,
+  index = 0,
 }) => {
   return (
-    <>
+    <Fade delay={100 * (index + 1)}>
       <div className="w-72 flex flex-col bg-white dark:bg-DarkBlue rounded-2xl  shadow-md hover:shadow-xl dark:shadow-DarkBlue">
-        {/*<img src="" alt="" className="h-28 object-fit:cover object-position:center bg-purple-950 rounded-t-2xl" />*/}
-        <div className="h-28 p-3 flex bg-purple-950 rounded-t-2xl text-white text-2xl font-extrabold select-none">
-          <p className="m-auto">NOT IMAGE</p>
-        </div>
+        {image ? (
+          <img
+            src={image}
+            alt={"Image of " + name + " Event"}
+            className="h-28 object-cover object-center bg-purple-950 rounded-t-2xl"
+          />
+        ) : (
+          <div className="h-28 p-3 flex bg-purple-950 rounded-t-2xl text-white text-2xl font-extrabold select-none">
+            <p className="m-auto">NOT IMAGE</p>
+          </div>
+        )}
         <BodyCard
           name={name}
           date={date}
@@ -119,23 +205,24 @@ export const EventCard = ({
           <></>
         )}
       </div>
-    </>
+    </Fade>
   );
 };
 
 export const DisableEventCard = ({
-  img,
+  image,
   name = "Event name",
   hour = "Event hour",
   date = "Event date",
   place = "Event place",
+  index = 0,
 }) => {
   return (
-    <>
+    <Fade>
       <div className="relative select-none">
         <div className="absolute w-72 h-full bg-black opacity-30 rounded-2xl hover:shadow-xl dark:shadow-DarkBlue" />
         <EventCard
-          img={img}
+          image={image}
           name={name}
           hour={hour}
           date={date}
@@ -143,28 +230,32 @@ export const DisableEventCard = ({
           enabled={false}
         />
       </div>
-    </>
+    </Fade>
   );
 };
 
 export const PopularEventCard = ({
-  img,
+  image,
   name = "Event name",
   date = "Event date",
   place = "Event place",
   placeURL,
+  index = 0,
 }) => {
   return (
-    <>
+    <Fade right delay={100 * (index + 1)}>
       <button className="w-72 flex bg-white hover:bg-SoftWhite dark:bg-DarkBlue rounded-2xl shadow-md hover:shadow-xl dark:shadow-DarkBlue">
-        {/* <img
-          src=""
-          alt=""
-          className="w-24 h-full object-fit:cover object-position:center bg-purple-950 rounded-l-2xl select-none"
-        /> */}
-        <div className="w-24 h-full p-3 flex items-center bg-purple-950 rounded-l-2xl text-center text-white text-lg font-bold select-none">
-          <p className="">NOT IMAGE</p>
-        </div>
+        {image ? (
+          <img
+            src={image}
+            alt={"Image of " + name + " Event"}
+            className="w-24 h-full object-fill object-center bg-purple-950 rounded-l-2xl select-none"
+          />
+        ) : (
+          <div className="w-24 h-full p-3 flex items-center bg-purple-950 rounded-l-2xl text-center text-white text-lg font-bold select-none">
+            <p className="">NOT IMAGE</p>
+          </div>
+        )}
         <BodyCard
           name={name}
           date={date}
@@ -173,7 +264,7 @@ export const PopularEventCard = ({
           placeURL={placeURL}
         />
       </button>
-    </>
+    </Fade>
   );
 };
 
@@ -219,6 +310,14 @@ export const TextCard = ({ icon, text, placeURL }) => {
         </div>
       )}
     </>
+  );
+};
+
+export const NotFound = () => {
+  return (
+    <h3 className="w-72 mb-6 text-center text-lg font-bold dark:text-white">
+      Not tickets found
+    </h3>
   );
 };
 
