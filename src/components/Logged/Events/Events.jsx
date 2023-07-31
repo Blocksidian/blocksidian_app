@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../context/GlobalContext";
-import { EventCard, PopularEventCard } from "../Home/Home";
+import { EventCard, PopularEventCard, NotFound } from "../Home/Home";
 import { FaFilter, FaMagnifyingGlass } from "react-icons/fa6";
 
 const Home = () => {
@@ -96,6 +96,13 @@ const Home = () => {
               value={searchByName}
               change={setSearchByName}
             />
+            <div
+              className={`${
+                filterOpen ? "md:h-auto md:w-auto md:opacity-100" : "select-none h-0 w-0 opacity-0 -z-10"
+              } dark:text-white invisible select-none w-0 h-0 md:visible md:select-all`}
+            >
+              Filters will be here.
+            </div>
             <button
               onClick={handleFilterOpen}
               className="px-2 hover:ps-1 text-xl hover:text-2xl hover:text-DarkViolet dark:text-white dark:hover:text-SoftViolet"
@@ -106,13 +113,13 @@ const Home = () => {
           <div
             className={`${
               filterOpen ? "h-auto opacity-100" : "select-none h-0 opacity-0"
-            } dark:text-white transition-all`}
+            } dark:text-white transition-all md:invisible md:select-none md:h-0`}
           >
             Filters will be here.
           </div>
         </section>
         <section className="mb-6 px-0 2xl:px-12 3xl:px-20 lg:flex">
-          <article className="flex-auto">
+          <article className="flex-auto w-full">
             <h2 className="my-6 text-center text-2xl font-bold dark:text-white">
               Available Events
             </h2>
@@ -131,6 +138,8 @@ const Home = () => {
                     index={index}
                   />
                 ))
+              ) : searchByName.length ? (
+                <NotFound />
               ) : globalEvents.length ? (
                 globalEvents.map((item, index) => (
                   <EventCard

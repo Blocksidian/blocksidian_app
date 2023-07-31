@@ -37,7 +37,7 @@ const Home = () => {
           </span>
         </h1>
         <section className="mb-6 px-0 2xl:px-12 3xl:px-20 lg:flex">
-          <article className="flex-auto">
+          <article className="flex-auto w-full">
             <h2 className="my-6 text-center text-2xl font-bold dark:text-white">
               Available Tickets
             </h2>
@@ -166,7 +166,7 @@ export const DisableEventCard = ({
   return (
     <Fade>
       <div className="relative select-none">
-        <div className="absolute w-72 h-full bg-black opacity-30 rounded-2xl hover:shadow-xl dark:shadow-DarkBlue" />
+        <div className="absolute w-72 h-full z-10 bg-black opacity-30 rounded-2xl hover:shadow-xl dark:shadow-DarkBlue" />
         <EventCard
           image={image}
           name={name}
