@@ -24,6 +24,98 @@ export function GlobalContextProvider(props) {
     return [enabled, setEnabled];
   };
 
+  const globalEvents = [
+    {
+      image: "https://placehold.jp/1200x720.png",
+      name: "Burnout Syndromes",
+      date: "30/08/2023",
+      hour: "09:00 PM",
+      place: "Estadio akron",
+      placeURL: "https://goo.gl/maps/NZmy5AqvYz7aBEVH8",
+      href: "/home",
+      availability: true,
+    },
+    {
+      image: "",
+      name: "BTS",
+      date: "10/09/2023",
+      hour: "09:00 PM",
+      place: "Auditorio Nacional",
+      placeURL: "https://goo.gl/maps/BBmemcZsnKztkXTY7",
+      href: "/home",
+      availability: false,
+    },
+    {
+      image: "",
+      name: "The Weeknd",
+      date: "14/12/2023",
+      hour: "05:00 PM",
+      place: "Auditorio Telmex",
+      placeURL: "https://goo.gl/maps/5DjN4iirdye7nTLS6",
+      href: "/home",
+      availability: true,
+    },
+  ];
+
+  const myEvents = [
+    {
+      image: "https://placehold.jp/1200x720.png",
+      name: "Junior H",
+      date: "22/08/2023",
+      hour: "09:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+    {
+      image: "",
+      name: "Angeles Azules",
+      date: "22/08/2023",
+      hour: "06:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+    {
+      image: "",
+      name: "Julion Alvarez",
+      date: "29/07/2023",
+      hour: "02:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+  ];
+
+  const popularEvents = [
+    {
+      image: "https://placehold.jp/1200x720.png",
+      name: "Julion Alvarez",
+      date: "22/08/2023",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+    {
+      image: "",
+      name: "Angeles Azules",
+      date: "22/08/2023",
+      hour: "06:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+    {
+      image: "",
+      name: "Angeles Azules",
+      date: "30/07/2023",
+      hour: "06:00 PM",
+      place: "Palenque FENADU",
+      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
+      href: "/home",
+    },
+  ];
+
   return (
     <GlobalContext.Provider
       value={{
@@ -33,6 +125,9 @@ export function GlobalContextProvider(props) {
         navbar,
         setFooter,
         footer,
+        globalEvents,
+        myEvents,
+        popularEvents,
       }}
     >
       {props.children}

@@ -1,65 +1,10 @@
+import { useContext } from "react";
+import { GlobalContext } from "../../../context/GlobalContext";
 import { Fade } from "@successtar/react-reveal";
 import { FaRegCalendar, FaRegClock, FaMapLocationDot } from "react-icons/fa6";
 
 const Home = () => {
-  const myEvents = [
-    {
-      image: "https://placehold.jp/1200x720.png",
-      name: "Junior H",
-      date: "22/08/2023",
-      hour: "09:00 PM",
-      place: "Palenque FENADU",
-      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
-      href: "/home",
-    },
-    {
-      image: "",
-      name: "Angeles Azules",
-      date: "22/08/2023",
-      hour: "06:00 PM",
-      place: "Palenque FENADU",
-      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
-      href: "/home",
-    },
-    {
-      image: "",
-      name: "Julion Alvarez",
-      date: "29/07/2023",
-      hour: "02:00 PM",
-      place: "Palenque FENADU",
-      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
-      href: "/home",
-    },
-  ];
-
-  const popularEvents = [
-    {
-      image: "https://placehold.jp/1200x720.png",
-      name: "Julion Alvarez",
-      date: "22/08/2023",
-      place: "Palenque FENADU",
-      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
-      href: "/home",
-    },
-    {
-      image: "",
-      name: "Angeles Azules",
-      date: "22/08/2023",
-      hour: "06:00 PM",
-      place: "Palenque FENADU",
-      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
-      href: "/home",
-    },
-    {
-      image: "",
-      name: "Angeles Azules",
-      date: "30/07/2023",
-      hour: "06:00 PM",
-      place: "Palenque FENADU",
-      placeURL: "https://goo.gl/maps/pncs4PF9Ku6aKGm87",
-      href: "/home",
-    },
-  ];
+  const { globalEvents, myEvents, popularEvents } = useContext(GlobalContext);
 
   // Obtenemos la fecha actual y el comienzo del día de hoy
   const today = new Date();
@@ -150,6 +95,7 @@ const Home = () => {
                     name={item.name}
                     date={item.date}
                     place={item.place}
+                    placeURL={item.placeURL}
                     href={item.href}
                     index={index}
                   />
@@ -183,7 +129,7 @@ export const EventCard = ({
           <img
             src={image}
             alt={"Image of " + name + " Event"}
-            className="h-28 object-cover object-center bg-purple-950 rounded-t-2xl"
+            className="h-28 object-cover object-center bg-purple-950 rounded-t-2xl select-none"
           />
         ) : (
           <div className="h-28 p-3 flex bg-purple-950 rounded-t-2xl text-white text-2xl font-extrabold select-none">
