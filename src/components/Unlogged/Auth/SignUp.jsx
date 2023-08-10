@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { TextForm, ButtonForm, Popover } from "./LogIn";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { GlobalContext } from "../../../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   return (
@@ -13,29 +17,61 @@ const SignUp = () => {
 };
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
+
+  const { db } = useContext(GlobalContext);
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [Vpassword, setVPassword] = useState("");
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
+
+  const [openPopover, setOpenPopover] = useState(true);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
+    const firestore = db;
 
-    if (password === Vpassword) {
-      setPasswordsMatch(true);
-      setMessage("Correct");
+    if (password.length < 6) {
+      setMessage("The password must be 6");
+      setError(true);
+    } else if (password === Vpassword) {
       setUsername("");
       setEmail("");
       setPassword("");
       setVPassword("");
+      const auth = getAuth();
+      try {
+        // Crea el usuario en Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        // Agrega información adicional a Firestore
+        const userDocRef = doc(firestore, "users", userCredential.user.uid);
+        await setDoc(userDocRef, {
+          id: userCredential.user.uid,
+          username,
+          // Otros campos que quieras agregar
+        });
+        setMessage("Successful registration");
+        setError(false);
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      } catch (error) {
+        setMessage("Registration failed: " + error.code);
+        setError(true);
+      }
     } else {
       setMessage("Passwords do not match");
-      setPasswordsMatch(false);
+      setError(true);
     }
+    setOpenPopover(false);
   };
-
   return (
     <div className="px-4 py-8 max-w-screen-xs mx-auto items-center justify-center w-full">
       <h1 className="text-center text-3xl font-bold mb-6 dark:text-white">
@@ -44,7 +80,7 @@ const SignUpForm = () => {
           Blocksidian
         </span>
       </h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSignUp}>
         <TextForm
           name="Username"
           title="username"
@@ -62,6 +98,7 @@ const SignUpForm = () => {
           name="Password"
           title="password"
           type="password"
+          minLength="6"
           state={password}
           setState={setPassword}
         />
@@ -69,6 +106,7 @@ const SignUpForm = () => {
           name="Validate Password"
           title="validatepassword"
           type="password"
+          minLength="6"
           state={Vpassword}
           setState={setVPassword}
         />
@@ -97,9 +135,10 @@ const SignUpForm = () => {
         </NavLink>
       </div>
       <Popover
-        open={passwordsMatch}
-        setOpen={setPasswordsMatch}
+        open={openPopover}
+        setOpen={setOpenPopover}
         text={message}
+        error={error}
       />
     </div>
   );

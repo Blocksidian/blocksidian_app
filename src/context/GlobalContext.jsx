@@ -1,12 +1,36 @@
 import { createContext, useEffect, useState } from "react";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 export const GlobalContext = createContext();
 
 export function GlobalContextProvider(props) {
   const [darkMode, setDarkMode] = useState(true);
-  const [user, setUser] = useState(false);
   const [navbar, setNavbar] = useState(false);
   const [footer, setFooter] = useState(false);
+
+  const getCurrentUser = () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    return user;
+  };
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAvYBiGiqVlunBsuOhheOhsQ5iR3l60cks",
+    authDomain: "blocksidian-7b83e.firebaseapp.com",
+    projectId: "blocksidian-7b83e",
+    storageBucket: "blocksidian-7b83e.appspot.com",
+    messagingSenderId: "69561955459",
+    appId: "1:69561955459:web:f17eb1da38dd5a1fcb57b6",
+    measurementId: "G-01HFXTJQ32",
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
 
   const useDarkMode = () => {
     const [enabled, setEnabled] = useLocalStorage("dark-theme");
@@ -128,6 +152,9 @@ export function GlobalContextProvider(props) {
         globalEvents,
         myEvents,
         popularEvents,
+        analytics,
+        db,
+        getCurrentUser,
       }}
     >
       {props.children}

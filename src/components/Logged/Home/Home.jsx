@@ -1,10 +1,41 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../../../context/GlobalContext";
 import { Fade } from "@successtar/react-reveal";
 import { FaRegCalendar, FaRegClock, FaMapLocationDot } from "react-icons/fa6";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const Home = () => {
   const { globalEvents, myEvents, popularEvents } = useContext(GlobalContext);
+  const [username, setUsername] = useState("Username");
+
+  const auth = getAuth();
+  const firestore = getFirestore();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(firestore, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          setUsername(userData.username);
+          console.log(user.username);
+        }
+      }
+    };
+
+    fetchUserData();
+
+    const handleBeforeUnload = () => {
+      fetchUserData();
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [auth, firestore]);
 
   // Obtenemos la fecha actual y el comienzo del día de hoy
   const today = new Date();
@@ -33,7 +64,7 @@ const Home = () => {
         <h1 className="my-6 lg:mt-10 lg:mb-12 text-center text-3xl font-bold dark:text-white">
           Welcome Back <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-800">
-            * Username *
+            {username ? username : "nombre"}
           </span>
         </h1>
         <section className="mb-6 px-0 2xl:px-12 3xl:px-20 lg:flex">

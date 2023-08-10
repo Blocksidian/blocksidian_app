@@ -1,4 +1,7 @@
 import { useContext, useEffect, useState } from "react";
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 import { GlobalContext } from "../../../context/GlobalContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Fade } from "@successtar/react-reveal";
@@ -6,7 +9,11 @@ import DarkModeSwitch from "../DarkMode/DarkMode";
 import imageMobile from "../../../assets/LogoHexagon.svg";
 import imageDesktopW from "../../../assets/WhiteLogoXL.svg";
 import imageDesktopB from "../../../assets/BlackLogoXL.svg";
-import { FaCartShopping, FaUser } from "react-icons/fa6";
+import {
+  FaCartShopping,
+  FaUser,
+  FaArrowRightFromBracket,
+} from "react-icons/fa6";
 
 function Navbar() {
   const location = useLocation();
@@ -21,7 +28,8 @@ function Navbar() {
       urlFirst === "/signup" ||
       urlFirst === "/login" ||
       urlFirst === "/privacy" ||
-      urlFirst === "/terms"
+      urlFirst === "/terms" ||
+      urlFirst === "/other"
     ) {
       setNavbar(false);
     } else {
@@ -33,6 +41,9 @@ function Navbar() {
 }
 
 const NavbarLogged = () => {
+  const auth = getAuth();
+  const navigate = useNavigate();
+
   const { darkMode } = useContext(GlobalContext);
   const imageDesktop = darkMode ? imageDesktopW : imageDesktopB;
 
@@ -50,6 +61,18 @@ const NavbarLogged = () => {
     if (isMobileMenuOpen) {
       setMobileMenuOpen(!isMobileMenuOpen);
       setBurgerState(!burgerState);
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("Cierre de sesión exitoso");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
     }
   };
 
@@ -73,6 +96,12 @@ const NavbarLogged = () => {
       href: "/profile",
       title: "Profile page",
       icon: <FaUser />,
+    },
+    {
+      name: "Log Out",
+      title: "Log Out",
+      icon: <FaArrowRightFromBracket />,
+      logout: handleLogout,
     },
   ];
 
@@ -110,6 +139,7 @@ const NavbarLogged = () => {
               name={item.name}
               title={item.title}
               icon={item.icon}
+              logout={item.logout}
             />
           ))}
         </ul>
@@ -130,6 +160,7 @@ const NavbarLogged = () => {
               name={item.name}
               title={item.title}
               click={handleMobileMenu}
+              logout={item.logout}
             />
           ))}
         </ul>
@@ -344,11 +375,22 @@ const NavItemMobile = ({
   name = "Link",
   title = "",
   click,
+  logout,
 }) => {
   return (
     <>
       <li className="text-center">
-        {section ? (
+        {logout ? (
+          <button
+            title={title}
+            className="py-1 px-5 hover:font-medium hover:text-DarkViolet dark:hover:text-SoftViolet"
+            onClick={() => {
+              logout();
+            }}
+          >
+            {name}
+          </button>
+        ) : section ? (
           <a
             title={title}
             href={section}
@@ -384,10 +426,25 @@ const NavItemDesktop = ({
   title = "",
   button,
   style,
+  logout,
 }) => {
   return (
     <li className={`${icon ? "px-1" : " flex-initial"}`}>
-      {section ? (
+      {logout ? (
+        <button
+          title={title}
+          onClick={() => {
+            logout();
+          }}
+          className={`${
+            icon
+              ? "text-xl h-6 flex items-center"
+              : "py-1 border-DarkViolet hover:border-b-2"
+          } hover:text-DarkViolet dark:hover:text-SoftViolet dark:border-SoftViolet`}
+        >
+          {icon ? icon : name}
+        </button>
+      ) : section ? (
         <a
           title={title}
           href={section}
