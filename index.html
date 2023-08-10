@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./src/assets/LogoFavicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blocksidian</title>
-    <meta
-      name="description"
-      content="Buy, sell and trade event tickets securely with solidity"
-    />
-    <meta name="keywords" content="blocksidian, blockchain, tickets, secure" />
-    <meta name="robots" content="all" />
-    <meta name="author" content="Blocksidian" />
-    <meta name="publisher" content="Blocksidian" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./src/assets/LogoFavicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blocksidian</title>
+  <meta name="description" content="Buy, sell and trade event tickets securely with solidity" />
+  <meta name="keywords" content="blocksidian, blockchain, tickets, secure" />
+  <meta name="robots" content="all" />
+  <meta name="author" content="Blocksidian" />
+  <meta name="publisher" content="Blocksidian" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(function (registration) {
+          console.log('Service Worker registrado con éxito:', registration);
+        })
+        .catch(function (error) {
+          console.log('Error al registrar el Service Worker:', error);
+        });
+    }
+  </script>
+</body>
+
 </html>
