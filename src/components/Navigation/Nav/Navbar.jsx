@@ -70,7 +70,7 @@ const NavbarLogged = () => {
       console.log("Cierre de sesión exitoso");
       setTimeout(() => {
         navigate("/");
-      }, 3000);
+      }, 1000);
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }

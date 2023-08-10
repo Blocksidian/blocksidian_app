@@ -60,8 +60,8 @@ const SignUpForm = () => {
         setMessage("Successful registration");
         setError(false);
         setTimeout(() => {
-          navigate("/login");
-        }, 3000);
+          navigate("/home");
+        }, 2000);
       } catch (error) {
         setMessage("Registration failed: " + error.code);
         setError(true);

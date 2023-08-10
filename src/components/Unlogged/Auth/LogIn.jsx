@@ -39,7 +39,7 @@ const LoginForm = () => {
       setError(false);
       setTimeout(() => {
         navigate("/home");
-      }, 3000);
+      }, 2000);
     } catch (error) {
       setMessage("Login failed: " + error.code);
       setError(true);
@@ -143,7 +143,7 @@ export const Popover = ({
       const timeoutId = setTimeout(() => {
         setIsOpen(false);
         setOpen(true);
-      }, 3000);
+      }, 2000);
       return () => clearTimeout(timeoutId);
     } else {
       setIsOpen(false);

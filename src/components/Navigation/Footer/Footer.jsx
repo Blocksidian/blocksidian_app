@@ -53,7 +53,8 @@ function footer() {
       urlFirst === "/" ||
       urlFirst === "/contact" ||
       urlFirst === "/privacy" ||
-      urlFirst === "/terms"
+      urlFirst === "/terms" ||
+      urlFirst === "/other"
     ) {
       setFooter(false);
     } else {
