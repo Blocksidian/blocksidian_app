@@ -18,6 +18,7 @@ import TermsView from "./routesComponents/Unlogged/Terms";
 // Vistas Ingresado
 import HomeView from "./routesComponents/Logged/HomeView";
 import EventsView from "./routesComponents/Logged/EventsView";
+import CreateEventsView from "./routesComponents/Logged/CreateEventsView";
 
 function RoutesProject() {
   // Detecta el cambio de pantalla y hacer transicion
@@ -39,6 +40,7 @@ function RoutesProject() {
       {/* Vistas Ingresado */}
       <Route path="/home" element={<HomeView />} />
       <Route path="/events" element={<EventsView />} />
+      <Route path="/create_event" element={<CreateEventsView />} />
     </Routes>
   );
 }

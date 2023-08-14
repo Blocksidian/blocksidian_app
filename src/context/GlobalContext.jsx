@@ -1,7 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 export const GlobalContext = createContext();
@@ -10,12 +16,6 @@ export function GlobalContextProvider(props) {
   const [darkMode, setDarkMode] = useState(true);
   const [navbar, setNavbar] = useState(false);
   const [footer, setFooter] = useState(false);
-
-  const getCurrentUser = () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    return user;
-  };
 
   const firebaseConfig = {
     apiKey: "AIzaSyAvYBiGiqVlunBsuOhheOhsQ5iR3l60cks",
@@ -30,6 +30,7 @@ export function GlobalContextProvider(props) {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const auth = getAuth();
   const db = getFirestore(app);
 
   const useDarkMode = () => {
@@ -48,7 +49,101 @@ export function GlobalContextProvider(props) {
     return [enabled, setEnabled];
   };
 
-  const globalEvents = [
+  const [username, setUsername] = useState("Username");
+  const [userId, setUserId] = useState("");
+  const [globalEvents, setGlobalEvents] = useState([]);
+
+  useEffect(() => {
+    // Función para obtener todos los eventos
+    const getAllEvents = async () => {
+      try {
+        const eventsCollection = collection(db, "events");
+        const eventsSnapshot = await getDocs(eventsCollection);
+
+        const events = [];
+        eventsSnapshot.forEach((doc) => {
+          events.push({ id: doc.id, ...doc.data() });
+        });
+
+        return events;
+      } catch (error) {
+        console.error("Error al obtener los eventos:", error);
+        return [];
+      }
+    };
+
+    async function fetchEvents() {
+      try {
+        const events = await getAllEvents();
+        const formattedEvents = events.map(formatEvent);
+        setGlobalEvents(formattedEvents);
+      } catch (error) {
+        console.error("Error al obtener los eventos:", error);
+      }
+    }
+
+    fetchEvents();
+
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          const userData = userDocSnap.data();
+          setUsername(userData.username);
+          setUserId(user.uid);
+        }
+      }
+    };
+
+    fetchUserData();
+
+    const handleBeforeUnload = () => {
+      fetchUserData();
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  // Función para formatear un objeto de evento
+  const formatEvent = (event) => {
+    const formattedEvent = {
+      id: event.id,
+      image: event.imageURL || "https://placehold.jp/1200x720.png",
+      name: event.name,
+      date: formatDate(event.date),
+      hour: formatHour(event.date),
+      place: event.place,
+      placeURL: event.placeURL,
+      href: "/home",
+      availability: true,
+    };
+    return formattedEvent;
+  };
+
+  // Función para formatear la fecha (ejemplo: "30/08/2023")
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp.seconds * 1000);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  // Función para formatear la hora (ejemplo: "09:00 PM")
+  const formatHour = (timestamp) => {
+    const date = new Date(timestamp.seconds * 1000);
+    const hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const formattedHours = hours % 12 || 12;
+    return `${formattedHours}:${minutes} ${ampm}`;
+  };
+
+  /* const globalEvents = [
     {
       image: "https://placehold.jp/1200x720.png",
       name: "Burnout Syndromes",
@@ -79,7 +174,7 @@ export function GlobalContextProvider(props) {
       href: "/home",
       availability: true,
     },
-  ];
+  ]; */
 
   const myEvents = [
     {
@@ -154,7 +249,8 @@ export function GlobalContextProvider(props) {
         popularEvents,
         analytics,
         db,
-        getCurrentUser,
+        userId,
+        username,
       }}
     >
       {props.children}

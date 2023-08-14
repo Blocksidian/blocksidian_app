@@ -1,6 +1,10 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { TextForm, ButtonForm, Popover } from "./LogIn";
+import {
+  Popover,
+  TextForm,
+  ButtonForm,
+} from "../../GlobalComponents/GlobalComponents";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { GlobalContext } from "../../../context/GlobalContext";

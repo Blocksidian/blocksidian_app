@@ -1,10 +1,55 @@
 import { useContext, useEffect, useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
 import { GlobalContext } from "../../../context/GlobalContext";
-import { EventCard, PopularEventCard, NotFound } from "../Home/Home";
-import { FaFilter, FaMagnifyingGlass } from "react-icons/fa6";
+import { getAuth } from "firebase/auth";
 
-const Home = () => {
-  const { globalEvents, myEvents } = useContext(GlobalContext);
+import {
+  Popover,
+  EventCard,
+  PopularEventCard,
+  NotFound,
+  TextFormFilter,
+} from "../../GlobalComponents/GlobalComponents";
+import { FaFilter } from "react-icons/fa6";
+
+const Events = () => {
+  const { globalEvents, myEvents, db } = useContext(GlobalContext);
+
+  const [userId, setUserId] = useState("");
+  const auth = getAuth();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        setUserId(user.uid);
+      }
+    };
+
+    fetchUserData();
+  }, [auth, db]);
+
+  const [openPopover, setOpenPopover] = useState(true);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState(false);
+
+  const joinEvent = async (eventId) => {
+    try {
+      const docRef = doc(db, "events_users", `${userId}_${eventId}`);
+      await setDoc(docRef, {
+        userId,
+        eventId,
+        rate: 0,
+      });
+      setError(false);
+      setMessage("User linked to the event");
+    } catch (error) {
+      setError(false);
+      setMessage("Error linking user and event");
+      console.error("Error linking user and event: ", error);
+    }
+    setOpenPopover(false);
+  };
 
   // Obtenemos la fecha actual y el comienzo del día de hoy
   const today = new Date();
@@ -90,7 +135,7 @@ const Home = () => {
         </h1>
         <section className="px-2">
           <div className="flex justify-between mb-3">
-            <TextForm
+            <TextFormFilter
               id="nameFilter"
               name="Filter by name"
               value={searchByName}
@@ -98,7 +143,9 @@ const Home = () => {
             />
             <div
               className={`${
-                filterOpen ? "md:h-auto md:w-auto md:opacity-100" : "select-none h-0 w-0 opacity-0 -z-10"
+                filterOpen
+                  ? "md:h-auto md:w-auto md:opacity-100"
+                  : "select-none h-0 w-0 opacity-0 -z-10"
               } dark:text-white invisible select-none w-0 h-0 md:visible md:select-all`}
             >
               Filters will be here.
@@ -128,6 +175,8 @@ const Home = () => {
                 filteredResults.map((item, index) => (
                   <EventCard
                     key={index}
+                    id={item.id}
+                    joinEvent={joinEvent}
                     image={item.image}
                     name={item.name}
                     date={item.date}
@@ -144,6 +193,8 @@ const Home = () => {
                 globalEvents.map((item, index) => (
                   <EventCard
                     key={index}
+                    id={item.id}
+                    joinEvent={joinEvent}
                     image={item.image}
                     name={item.name}
                     date={item.date}
@@ -184,40 +235,14 @@ const Home = () => {
           </article>
         </section>
       </article>
+      <Popover
+        open={openPopover}
+        setOpen={setOpenPopover}
+        text={message}
+        error={error}
+      />
     </>
   );
 };
 
-export const TextForm = ({
-  id = "",
-  name = "",
-  value = "",
-  change,
-  type = "text",
-  required = false,
-  disabled = false,
-}) => {
-  return (
-    <>
-      <div className="relative w-full me-5">
-        <input
-          type={type}
-          className="w-full rounded-md py-2 px-3 ps-9 border-2 dark:border-gray-800 bg-SoftWhite dark:bg-gray-900 dark:text-white"
-          placeholder={name}
-          id={id}
-          value={value}
-          onChange={(e) => {
-            change(e.target.value);
-          }}
-          required={required}
-          disabled={disabled}
-        />
-        <div className="absolute top-3.5 left-3 text-gray-400">
-          <FaMagnifyingGlass />
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default Home;
+export default Events;

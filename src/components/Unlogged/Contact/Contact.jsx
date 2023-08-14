@@ -1,4 +1,8 @@
-import { Fade } from "@successtar/react-reveal";
+import {
+  TextFormLabel,
+  TextAreaFormLabel,
+} from "../../GlobalComponents/GlobalComponents";
+
 import { useState } from "react";
 
 function Contact() {
@@ -41,7 +45,7 @@ export const Form = () => {
         <form onSubmit={handleSubmit}>
           <div className="sm:flex gap-10">
             <div className="mb-4 flex-1">
-              <TextForm
+              <TextFormLabel
                 name="Your Name"
                 title="name"
                 state={name}
@@ -49,7 +53,7 @@ export const Form = () => {
               />
             </div>
             <div className="mb-4 flex-1">
-              <TextForm
+              <TextFormLabel
                 name="Your Email"
                 title="email"
                 type="email"
@@ -59,7 +63,7 @@ export const Form = () => {
             </div>
           </div>
           <div className="mb-4">
-            <TextAreaForm
+            <TextAreaFormLabel
               name="Your Message"
               title="message"
               state={message}
@@ -81,62 +85,3 @@ export const Form = () => {
 };
 
 export default Contact;
-
-const TextForm = ({
-  name = "name",
-  title = "title",
-  type = "text",
-  state,
-  setState,
-}) => {
-  return (
-    <>
-      <TextLabel name={name} title={title} />
-      <input
-        type={type}
-        id={title}
-        name={title}
-        value={state}
-        onChange={(e) => setState(e.target.value)}
-        className="px-4 py-4 w-full rounded-md sm:text-sm border-2 dark:border-gray-800 bg-SoftWhite dark:bg-gray-900 dark:text-white"
-        required
-      />
-    </>
-  );
-};
-
-const TextAreaForm = ({
-  name = "name",
-  title = "title",
-  rows = 5,
-  state,
-  setState,
-}) => {
-  return (
-    <>
-      <TextLabel name={name} title={title} />
-      <textarea
-        id={title}
-        name={title}
-        value={state}
-        rows={rows}
-        onChange={(e) => setState(e.target.value)}
-        className="px-4 py-4 w-full rounded-md sm:text-sm border-2 dark:border-gray-800 bg-SoftWhite dark:bg-gray-900 dark:text-white"
-        required
-      ></textarea>
-    </>
-  );
-};
-
-const TextLabel = ({ name = "", title = "" }) => {
-  return (
-    <>
-      <label
-        htmlFor={title}
-        className="block text-sm mb-2 font-medium text-SoftGray"
-      >
-        {name}
-      </label>
-    </>
-  );
-};
