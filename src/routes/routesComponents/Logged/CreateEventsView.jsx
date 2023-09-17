@@ -7,13 +7,14 @@ import { Helmet } from "react-helmet";
 function CreateEventsView() {
   return (
     <AnimatedTransition>
-      <ProtectedRoute />
-      <CreateEventsContextProvider>
-        <Helmet>
-          <title>Blocksidian | Create Events</title>
-        </Helmet>
-        <CreateEvents />
-      </CreateEventsContextProvider>
+      <ProtectedRoute>
+        <CreateEventsContextProvider>
+          <Helmet>
+            <title>Blocksidian | Create Events</title>
+          </Helmet>
+          <CreateEvents />
+        </CreateEventsContextProvider>
+      </ProtectedRoute>
     </AnimatedTransition>
   );
 }

@@ -1,27 +1,32 @@
-import { useEffect } from "react";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { useEffect, useContext } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { Loading } from "../../components/GlobalComponents/GlobalComponents";
+import { GlobalContext } from "../../context/GlobalContext";
 
-function AlreadyLoggedIn() {
+function AlreadyLoggedIn(props) {
   const auth = getAuth();
-  const firestore = getFirestore();
   const navigate = useNavigate();
+  const { checkedLogin, setCheckedLogin } = useContext(GlobalContext);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const user = auth.currentUser;
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const userDocRef = doc(firestore, "users", user.uid);
-        const userDocSnap = await getDoc(userDocRef);
-        if (userDocSnap.exists()) {
-          navigate("/home");
-        }
+        setCheckedLogin(true);
+        navigate("/home");
+      } else {
+        setCheckedLogin(false);
       }
-    };
-    fetchUserData();
-  }, [auth, firestore]);
-  return <></>;
+    });
+
+    return () => unsubscribe();
+  }, [auth, navigate]);
+
+  if (checkedLogin) {
+    return <Loading />;
+  }
+
+  return <>{props.children}</>;
 }
 
 export default AlreadyLoggedIn;

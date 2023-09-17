@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-import { GlobalContext } from "../../../context/GlobalContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Fade } from "@successtar/react-reveal";
-import DarkModeSwitch from "../DarkMode/DarkMode";
-import imageMobile from "../../../assets/LogoHexagon.svg";
-import imageDesktopW from "../../../assets/WhiteLogoXL.svg";
-import imageDesktopB from "../../../assets/BlackLogoXL.svg";
+import DarkModeSwitch from "./DarkMode/DarkMode";
+import imageMobile from "../../assets/LogoHexagon.svg";
+import imageDesktopW from "../../assets/WhiteLogoXL.svg";
+import imageDesktopB from "../../assets/BlackLogoXL.svg";
 import {
   FaCartShopping,
   FaUser,
@@ -16,12 +16,21 @@ import {
 } from "react-icons/fa6";
 
 function Navbar() {
+  const { navbar, setNavbar, checkedLogin } = useContext(GlobalContext);
+
   const location = useLocation();
   const urlFirst = location.pathname;
 
-  const { navbar, setNavbar } = useContext(GlobalContext);
-
   useEffect(() => {
+    const urls = [
+      "/",
+      "/contact",
+      "/signup",
+      "/login",
+      "/privacy",
+      "/terms",
+      "/other",
+    ];
     if (
       urlFirst === "/" ||
       urlFirst === "/contact" ||
@@ -37,7 +46,31 @@ function Navbar() {
     }
   }, [urlFirst]);
 
-  return <>{navbar ? <NavbarLogged /> : <NavbarLandingPage />}</>;
+  return (
+    <>
+      {navbar ? (
+        checkedLogin ? (
+          <NavbarLogged />
+        ) : (
+          <NavbarLandingPage />
+        )
+      ) : (
+        <NavbarLandingPage />
+      )}
+    </>
+  );
+
+  useEffect(() => {
+    if (urlFirst === "/") {
+      return <NavbarLandingPage />;
+    } else {
+      return checkedLogin ? <NavbarLogged /> : <NavbarLandingPage />;
+    }
+  }, [urlFirst]);
+
+  if (!checkedLogin) {
+    return <NavbarLandingPage />;
+  }
 }
 
 const NavbarLogged = () => {

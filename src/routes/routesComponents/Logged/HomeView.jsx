@@ -7,13 +7,14 @@ import { Helmet } from "react-helmet";
 function HomeView() {
   return (
     <AnimatedTransition>
-      <ProtectedRoute />
-      <HomeContextProvider>
-        <Helmet>
-          <title>Blocksidian | Dashboard</title>
-        </Helmet>
-        <Home />
-      </HomeContextProvider>
+      <ProtectedRoute>
+        <HomeContextProvider>
+          <Helmet>
+            <title>Blocksidian | Dashboard</title>
+          </Helmet>
+          <Home />
+        </HomeContextProvider>
+      </ProtectedRoute>
     </AnimatedTransition>
   );
 }

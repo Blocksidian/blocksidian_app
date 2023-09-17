@@ -7,13 +7,14 @@ import { Helmet } from "react-helmet";
 function LogInView() {
   return (
     <AnimatedTransition>
-      <AlreadyLoggedIn />
-      <LogInContextProvider>
-        <Helmet>
-          <title>Blocksidian | Log In</title>
-        </Helmet>
-        <LogIn />
-      </LogInContextProvider>
+      <AlreadyLoggedIn>
+        <LogInContextProvider>
+          <Helmet>
+            <title>Blocksidian | Log In</title>
+          </Helmet>
+          <LogIn />
+        </LogInContextProvider>
+      </AlreadyLoggedIn>
     </AnimatedTransition>
   );
 }

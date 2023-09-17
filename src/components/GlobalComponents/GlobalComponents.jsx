@@ -1,6 +1,39 @@
 import { useState, useEffect } from "react";
-import { FaRegCalendar, FaRegClock, FaMapLocationDot } from "react-icons/fa6";
+import {
+  FaRegCalendar,
+  FaRegClock,
+  FaMapLocationDot,
+  FaMagnifyingGlass,
+} from "react-icons/fa6";
 import { Fade } from "@successtar/react-reveal";
+
+export const Loading = ({
+  xs = "5.5",
+  txs = "sm",
+  text = true,
+  label = "cargando",
+}) => {
+  return (
+    <div
+      className={`flex items-center justify-center my-auto loader select-none`}
+    >
+      <style>
+        {`
+            .loader {
+              width: ${xs}rem;
+              height: ${xs}rem;
+            }
+          `}
+      </style>
+      <div className="animate-spin rounded-full border-y-4 border-red-500 border-opacity-50 h-full w-full"></div>
+      {text && (
+        <span className={`absolute text-red-500 font-thin ${"text-" + txs}`}>
+          {label}
+        </span>
+      )}
+    </div>
+  );
+};
 
 export const Popover = ({
   open = false,
@@ -296,8 +329,6 @@ const TextLabel = ({ name = "", title = "" }) => {
     </>
   );
 };
-
-import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export const TextFormFilter = ({
   id = "",

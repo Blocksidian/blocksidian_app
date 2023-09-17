@@ -235,6 +235,9 @@ export function GlobalContextProvider(props) {
     },
   ];
 
+  //check if is logged
+  const [checkedLogin, setCheckedLogin] = useState(false);
+
   return (
     <GlobalContext.Provider
       value={{
@@ -251,6 +254,8 @@ export function GlobalContextProvider(props) {
         db,
         userId,
         username,
+        checkedLogin,
+        setCheckedLogin,
       }}
     >
       {props.children}

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../../../context/GlobalContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Fade } from "@successtar/react-reveal";
-import imageDesktopW from "../../../assets/WhiteLogoXL.svg";
-import imageDesktopB from "../../../assets/BlackLogoXL.svg";
+import imageDesktopW from "../../assets/WhiteLogoXL.svg";
+import imageDesktopB from "../../assets/BlackLogoXL.svg";
 import { FaYoutube, FaGithub } from "react-icons/fa";
 
 function footer() {
-  const { darkMode, footer, setFooter } = useContext(GlobalContext);
+  const { darkMode, footer, setFooter, checkedLogin } = useContext(GlobalContext);
   const imageDesktop = darkMode ? imageDesktopW : imageDesktopB;
 
   const location = useLocation();
