@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Fade } from "@successtar/react-reveal";
-import DarkModeSwitch from "./DarkMode/DarkMode";
+import DarkModeSwitch from "./DarkMode";
 import imageMobile from "../../assets/LogoHexagon.svg";
 import imageDesktopW from "../../assets/WhiteLogoXL.svg";
 import imageDesktopB from "../../assets/BlackLogoXL.svg";
@@ -16,69 +16,30 @@ import {
 } from "react-icons/fa6";
 
 function Navbar() {
-  const { navbar, setNavbar, checkedLogin } = useContext(GlobalContext);
+  const { checkedLogin } = useContext(GlobalContext);
 
   const location = useLocation();
   const urlFirst = location.pathname;
+  const urls = [
+    "/",
+    "/contact",
+    "/signup",
+    "/login",
+    "/privacy",
+    "/terms",
+    "/other",
+  ];
 
-  useEffect(() => {
-    const urls = [
-      "/",
-      "/contact",
-      "/signup",
-      "/login",
-      "/privacy",
-      "/terms",
-      "/other",
-    ];
-    if (
-      urlFirst === "/" ||
-      urlFirst === "/contact" ||
-      urlFirst === "/signup" ||
-      urlFirst === "/login" ||
-      urlFirst === "/privacy" ||
-      urlFirst === "/terms" ||
-      urlFirst === "/other"
-    ) {
-      setNavbar(false);
-    } else {
-      setNavbar(true);
-    }
-  }, [urlFirst]);
-
-  return (
-    <>
-      {navbar ? (
-        checkedLogin ? (
-          <NavbarLogged />
-        ) : (
-          <NavbarLandingPage />
-        )
-      ) : (
-        <NavbarLandingPage />
-      )}
-    </>
-  );
-
-  useEffect(() => {
-    if (urlFirst === "/") {
-      return <NavbarLandingPage />;
-    } else {
-      return checkedLogin ? <NavbarLogged /> : <NavbarLandingPage />;
-    }
-  }, [urlFirst]);
-
-  if (!checkedLogin) {
+  if (urls.includes(urlFirst)) {
     return <NavbarLandingPage />;
+  } else {
+    return checkedLogin ? <NavbarLogged /> : <NavbarLandingPage />;
   }
 }
 
 const NavbarLogged = () => {
   const auth = getAuth();
   const navigate = useNavigate();
-
-  const { darkMode } = useContext(GlobalContext);
-  const imageDesktop = darkMode ? imageDesktopW : imageDesktopB;
 
   // Estado local para el menú desplegable
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -144,21 +105,27 @@ const NavbarLogged = () => {
         <Fade duration={3000}>
           <NavLink
             to="/home"
-            title="Bloksidian page"
+            title="Blocksidian page"
             className="flex-initial"
             onClick={handleMobileMenuLogo}
           >
             <img
               src={imageMobile}
               alt="Mobile Logo"
-              title="Navbar Mobile Logo of Blocsidian"
+              title="Navbar Mobile Logo of Blocksidian"
               className="md:hidden h-16 hover:drop-shadow"
             />
             <img
-              src={imageDesktop}
+              src={imageDesktopW}
               alt="Desktop Logo"
-              title="Navbar Desktop Logo of Blocsidian"
-              className="hidden md:inline-block h-14 hover:drop-shadow"
+              title="Navbar Desktop Logo of Blocksidian"
+              className={`hidden md:dark:inline-block h-14 hover:drop-shadow`}
+            />
+            <img
+              src={imageDesktopB}
+              alt="Desktop Logo"
+              title="Navbar Desktop Logo of Blocksidian"
+              className="hidden md:inline-block md:dark:hidden h-14 hover:drop-shadow"
             />
           </NavLink>
         </Fade>
@@ -211,9 +178,6 @@ const NavbarLogged = () => {
 };
 
 const NavbarLandingPage = () => {
-  const { darkMode } = useContext(GlobalContext);
-  const imageDesktop = darkMode ? imageDesktopW : imageDesktopB;
-
   // Estado local para el menú desplegable
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [burgerState, setBurgerState] = useState(false);
@@ -274,41 +238,53 @@ const NavbarLandingPage = () => {
         {urlFirst === "/" ? (
           <a
             href="#main"
-            title="Bloksidian page"
+            title="Blocksidian page"
             className="flex-initial"
             onClick={handleMobileMenuLogo}
           >
             <img
               src={imageMobile}
               alt="Mobile Logo"
-              title="Navbar Mobile Logo of Blocsidian"
+              title="Navbar Mobile Logo of Blocksidian"
               className="md:hidden h-16 hover:drop-shadow"
             />
             <img
-              src={imageDesktop}
+              src={imageDesktopW}
               alt="Desktop Logo"
-              title="Navbar Desktop Logo of Blocsidian"
-              className="hidden md:inline-block h-14 hover:drop-shadow"
+              title="Navbar Desktop Logo of Blocksidian"
+              className={`hidden md:dark:inline-block h-14 hover:drop-shadow`}
+            />
+            <img
+              src={imageDesktopB}
+              alt="Desktop Logo"
+              title="Navbar Desktop Logo of Blocksidian"
+              className="hidden md:inline-block md:dark:hidden h-14 hover:drop-shadow"
             />
           </a>
         ) : (
           <NavLink
             to=""
-            title="Bloksidian page"
+            title="Blocksidian page"
             className="flex-initial"
             onClick={handleMobileMenuLogo}
           >
             <img
               src={imageMobile}
               alt="Mobile Logo"
-              title="Navbar Mobile Logo of Blocsidian"
+              title="Navbar Mobile Logo of Blocksidian"
               className="md:hidden h-16 hover:drop-shadow"
             />
             <img
-              src={imageDesktop}
+              src={imageDesktopW}
               alt="Desktop Logo"
-              title="Navbar Desktop Logo of Blocsidian"
-              className="hidden md:inline-block h-14 hover:drop-shadow"
+              title="Navbar Desktop Logo of Blocksidian"
+              className={`hidden md:dark:inline-block h-14 hover:drop-shadow`}
+            />
+            <img
+              src={imageDesktopB}
+              alt="Desktop Logo"
+              title="Navbar Desktop Logo of Blocksidian"
+              className="hidden md:inline-block md:dark:hidden h-14 hover:drop-shadow"
             />
           </NavLink>
         )}

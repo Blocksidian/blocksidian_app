@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink, useLocation } from "react-router-dom";
 import { Fade } from "@successtar/react-reveal";
@@ -7,9 +7,6 @@ import imageDesktopB from "../../assets/BlackLogoXL.svg";
 import { FaYoutube, FaGithub } from "react-icons/fa";
 
 function footer() {
-  const { darkMode, footer, setFooter, checkedLogin } = useContext(GlobalContext);
-  const imageDesktop = darkMode ? imageDesktopW : imageDesktopB;
-
   const location = useLocation();
   const urlFirst = location.pathname;
 
@@ -47,41 +44,17 @@ function footer() {
   urlFirst != "/"
     ? delete navigation.company[0].section
     : (navigation.company[0].section = "#aboutus");
+  const urls = ["/", "/contact", "/privacy", "/terms", "/other"];
 
-  useEffect(() => {
-    if (
-      urlFirst === "/" ||
-      urlFirst === "/contact" ||
-      urlFirst === "/privacy" ||
-      urlFirst === "/terms" ||
-      urlFirst === "/other"
-    ) {
-      setFooter(false);
-    } else {
-      setFooter(true);
-    }
-  }, [urlFirst]);
-
-  return (
-    <>
-      {footer ? (
-        <FooterLogged
-          navigation={navigation}
-          imageDesktop={imageDesktop}
-          urlFirst={urlFirst}
-        />
-      ) : (
-        <FooterUnLogged
-          navigation={navigation}
-          imageDesktop={imageDesktop}
-          urlFirst={urlFirst}
-        />
-      )}
-    </>
+  return urls.includes(urlFirst) ? (
+    <FooterBigger navigation={navigation} urlFirst={urlFirst} />
+  ) : (
+    <FooterSimple navigation={navigation} urlFirst={urlFirst} />
   );
 }
 
-const FooterLogged = ({ navigation, imageDesktop, urlFirst }) => {
+const FooterSimple = ({ navigation, urlFirst }) => {
+  const { checkedLogin } = useContext(GlobalContext);
   return (
     <>
       <footer className="z-10 sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
@@ -91,27 +64,33 @@ const FooterLogged = ({ navigation, imageDesktop, urlFirst }) => {
               {urlFirst === "/" ? (
                 <a
                   href="#main"
-                  title="Bloksidian page"
+                  title="Blocksidian page"
                   className="flex justify-center"
                 >
                   <img
-                    src={imageDesktop}
+                    src={imageDesktopB}
                     alt="Desktop Logo"
-                    title="Footer Logo of Blocsidian"
+                    title="Footer Logo of Blocksidian"
                     className="h-10 w-44 hover:drop-shadow"
                   />
                 </a>
               ) : (
                 <NavLink
-                  to=""
-                  title="Bloksidian page"
+                  to={checkedLogin ? "/home" : ""}
+                  title="Blocksidian page"
                   className="flex w-fit mx-auto"
                 >
                   <img
-                    src={imageDesktop}
+                    src={imageDesktopB}
                     alt="Desktop Logo"
-                    title="Footer Logo of Blocsidian"
-                    className="h-10 w-44 hover:drop-shadow"
+                    title="Footer Logo of Blocksidian"
+                    className="h-10 w-44 hover:drop-shadow dark:hidden"
+                  />
+                  <img
+                    src={imageDesktopW}
+                    alt="Desktop Logo"
+                    title="Footer Logo of Blocksidian"
+                    className={`hidden h-10 w-44 hover:drop-shadow dark:inline-block`}
                   />
                 </NavLink>
               )}
@@ -126,7 +105,7 @@ const FooterLogged = ({ navigation, imageDesktop, urlFirst }) => {
   );
 };
 
-const FooterUnLogged = ({ navigation, imageDesktop, urlFirst }) => {
+const FooterBigger = ({ navigation, urlFirst }) => {
   return (
     <>
       <footer className="z-10 pb-10 sm:py-10 px-3 dark:bg-gradient-to-b from-transparent sm:via-SoftWhite to-SoftWhite sm:dark:via-DarkBlue dark:to-DarkBlue sm:dark:to-DarkBlue transition">
@@ -136,27 +115,39 @@ const FooterUnLogged = ({ navigation, imageDesktop, urlFirst }) => {
               {urlFirst === "/" ? (
                 <a
                   href="#main"
-                  title="Bloksidian page"
+                  title="Blocksidian page"
                   className="flex justify-center"
                 >
                   <img
-                    src={imageDesktop}
+                    src={imageDesktopB}
                     alt="Desktop Logo"
-                    title="Footer Logo of Blocsidian"
-                    className="h-10 w-44 hover:drop-shadow"
+                    title="Footer Logo of Blocksidian"
+                    className="h-10 w-44 hover:drop-shadow dark:hidden"
+                  />
+                  <img
+                    src={imageDesktopW}
+                    alt="Desktop Logo"
+                    title="Footer Logo of Blocksidian"
+                    className={`hidden h-10 w-44 hover:drop-shadow dark:inline-block`}
                   />
                 </a>
               ) : (
                 <NavLink
                   to=""
-                  title="Bloksidian page"
+                  title="Blocksidian page"
                   className="flex w-fit mx-auto"
                 >
                   <img
-                    src={imageDesktop}
+                    src={imageDesktopB}
                     alt="Desktop Logo"
-                    title="Footer Logo of Blocsidian"
-                    className="h-10 w-44 hover:drop-shadow"
+                    title="Footer Logo of Blocksidian"
+                    className="h-10 w-44 hover:drop-shadow dark:hidden"
+                  />
+                  <img
+                    src={imageDesktopW}
+                    alt="Desktop Logo"
+                    title="Footer Logo of Blocksidian"
+                    className={`hidden h-10 w-44 hover:drop-shadow dark:inline-block`}
                   />
                 </NavLink>
               )}
