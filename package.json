@@ -10,6 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "@openzeppelin/contracts": "^4.9.3",
+    "chai": "^4.3.8",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.12.2",
     "@successtar/react-reveal": "^1.2.10",
     "firebase": "^10.1.0",
     "framer-motion": "^10.13.0",
