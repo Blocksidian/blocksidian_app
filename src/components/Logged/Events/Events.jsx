@@ -3,6 +3,10 @@ import { doc, setDoc } from "firebase/firestore";
 import { GlobalContext } from "../../../context/GlobalContext";
 import { getAuth } from "firebase/auth";
 
+import { ethers } from 'ethers';
+import TokenMaster from "../abi/TokenMaster.json"
+import config from "../abi/config.json"
+
 import {
   Popover,
   EventCard,
@@ -32,6 +36,67 @@ const Events = () => {
   const [openPopover, setOpenPopover] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
+
+
+  //blockchain
+  const [account, setAccount] = useState(null)
+  const [balance, setBalance] = useState(null)
+
+  const [provider, setProvider] = useState(null)
+  const [tokenMaster, setTokenMaster] = useState(null)
+  const [occasionss, setOccasionss] = useState([])
+
+  const loadBlockchainData = async () => {
+      //Proporciona la conexion a la blockchain para firmar transacciones
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      setProvider(provider)
+
+      //Dentro de config va la id de la red
+      const network = await provider.getNetwork()
+      console.log("This is the network: " + network)
+      const address = config[network.chainId].TokenMaster.address
+
+      const tokenMaster = new ethers.Contract(address, TokenMaster.abi, provider)
+      setTokenMaster(tokenMaster)
+
+      //Total de eventos
+      const totalOccasions = await tokenMaster.totalOccasions()
+      const occasions = []
+
+      for(var i = 1; i <= totalOccasions; i++){
+          const occassion = await tokenMaster.getEventDetails(i)
+          occasions.push(occassion)
+      }
+      setOccasionss(occasions)
+      
+      console.log( { totalOccasions: totalOccasions.toString() } )
+      console.log(occasions )
+
+
+      //Cambio de cuentas metamask
+      window.ethereum.on('accountsChanged', async () => {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+          const account = ethers.utils.getAddress(accounts[0])
+          setAccount(account)
+      })
+
+      //Obtener el balance
+      setBalance(100)
+  }
+
+  useEffect(() => {
+    try {
+      loadBlockchainData();
+    } catch (error) {
+      console.error("Error en useEffect:", error);
+    }
+  }, []);
+
+  const tokensToEther = (tokens) => {
+    const ether = ethers.utils.formatUnits(tokens, 'ether');
+    return parseFloat(ether);
+  }
+  //fin blockchain
 
   const joinEvent = async (eventId) => {
     try {
@@ -130,8 +195,8 @@ const Events = () => {
       <article className="container mx-auto px-2 xs:px-4 sm:px-6">
         <h1 className="my-6 lg:mt-10 lg:mb-12 text-center text-3xl font-bold dark:text-white">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-800">
-            Explore the events
-          </span>
+            Explore the events {account}
+          </span>          
         </h1>
         <section className="px-2">
           <div className="flex justify-between mb-3">
@@ -172,7 +237,7 @@ const Events = () => {
             </h2>
             <section className="flex flex-wrap gap-5 justify-center">
               {filteredResults.length ? (
-                filteredResults.map((item, index) => (
+                occasionss.map((item, index) => (
                   <EventCard
                     key={index}
                     id={item.id}
@@ -190,7 +255,7 @@ const Events = () => {
               ) : searchByName.length ? (
                 <NotFound />
               ) : globalEvents.length ? (
-                globalEvents.map((item, index) => (
+                occasionss.map((item, index) => (
                   <EventCard
                     key={index}
                     id={item.id}
@@ -198,8 +263,8 @@ const Events = () => {
                     image={item.image}
                     name={item.name}
                     date={item.date}
-                    hour={item.hour}
-                    place={item.place}
+                    hour={item.time}
+                    place={item.location}
                     placeURL={item.placeURL}
                     href={item.href}
                     index={index}
