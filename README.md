@@ -1,16 +1,36 @@
 # Blocksidian
 
+Blocksidian is a blockchain-based ticketing platform. It uses blockchain technology to offer a number of advantages, including:
 
+- **Security:** Tickets are tokenized on the blockchain, making them impossible to counterfeit or steal.
+- **Transparency:** Users can track the history of tickets on the blockchain. This provides greater transparency and trust for users.
+- **Efficiency:** Transactions can be carried out quickly and easily. This makes it easier for users to buy and sell tickets.
+- **Decentralization:** The platform is not controlled by a single entity. This makes it more resistant to censorship and fraud.
+
+Blocksidian allows event organizers to sell tickets in a secure and transparent way. Users can purchase tickets with cryptocurrencies.
+
+The platform is still under development.
+
+##
 
 We use React, Tailwind, Metamask, Solidity, Hardhat and Firebase.
 
-Implementing NomoApp plugins
+Implementing NomoApp plugin:
+
+<div align="center">
+
+| [![QR Plugin](https://firebasestorage.googleapis.com/v0/b/blocksidian-7b83e.appspot.com/o/NomoAppChido.png?alt=media&token=f3c7096d-bdcc-4c35-a4ba-9fd1cd7919f4)](https://nomo.app/pluginv1/blocksidian.netlify.app) | [![QR Website](https://firebasestorage.googleapis.com/v0/b/blocksidian-7b83e.appspot.com/o/BlocksidianChido.png?alt=media&token=cb029596-6f74-4c12-a087-d610ad1dc4fe)](https://blocksidian.netlify.app/) |
+| :---: | :---: |
+| [`QR Plugin`](https://nomo.app/pluginv1/blocksidian.netlify.app) | [`QR Website`](https://blocksidian.netlify.app/) |
+
+</div>
+
 
 ##
 
 Install dependencies: `npm install`.
 
-It is executed with the command: `npm run dev`.
+This code is executed with the command: `npm run dev`.
 
 A deploy was made using [Netlify](https://www.netlify.com/).
 ### [Visit the page here](https://blocksidian.netlify.app/)
