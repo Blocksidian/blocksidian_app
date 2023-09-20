@@ -26,6 +26,14 @@ Implementing NomoApp plugin:
 </div>
 
 
+<div align="center">
+
+| [![Presentation Link](https://firebasestorage.googleapis.com/v0/b/blocksidian-7b83e.appspot.com/o/PORTADA.png?alt=media&token=e1bf0d6e-9c2b-467c-8ebf-5a73f1d5fd52)](https://www.canva.com/design/DAFrZGpuBaw/y30Y9olN_WOxbLrNb2khPw/watch?utm_content=DAFrZGpuBaw&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink) | 
+| :---: |
+| [`Presentation Link`](https://www.canva.com/design/DAFrZGpuBaw/y30Y9olN_WOxbLrNb2khPw/watch?utm_content=DAFrZGpuBaw&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink) |
+
+</div>
+
 ##
 
 Install dependencies: `npm install`.
